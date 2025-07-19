@@ -1,0 +1,284 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8c52ff;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6d3fcc;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    @apply bg-white text-black antialiased;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Montserrat', sans-serif;
+    @apply font-bold text-black;
+  }
+}
+
+@layer components {
+  .container-wide {
+    @apply container mx-auto px-5 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-20 px-5 sm:px-6 lg:px-8;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+
+  /* Button styles - Enhanced for better color contrast */
+  .btn-primary {
+    @apply bg-[#8c52ff] text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-[#6d3fcc] hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#8c52ff] focus:ring-offset-2 shadow-md;
+  }
+
+  .btn-accent {
+    @apply bg-[#ff6b00] text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-[#cc5600] hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#ff6b00] focus:ring-offset-2 shadow-md;
+  }
+
+  .btn-outline {
+    @apply border-2 border-[#8c52ff] text-[#8c52ff] px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-[#8c52ff] hover:text-white hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#8c52ff] focus:ring-offset-2;
+  }
+
+  /* Adding light button variant for better contrast on dark backgrounds */
+  .btn-light {
+    @apply bg-white text-[#8c52ff] px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-gray-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 shadow-md;
+  }
+
+  /* Dark button for light backgrounds */
+  .btn-dark {
+    @apply bg-neutral-800 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-neutral-900 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-neutral-800 focus:ring-offset-2 shadow-md;
+  }
+
+  /* Improved gradient button */
+  .btn-gradient {
+    @apply bg-gradient-to-r from-[#8c52ff] to-[#ff6b00] text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:from-[#7946e0] hover:to-[#e66100] hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#8c52ff] focus:ring-offset-2 shadow-md;
+  }
+
+  /* Card styles with improved padding */
+  .card {
+    @apply bg-white rounded-xl shadow-lg border border-gray-100 p-6 md:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+
+  .card-premium {
+    @apply bg-white rounded-xl shadow-lg border-2 border-[#8c52ff]/10 p-6 md:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-[#8c52ff]/20;
+  }
+
+  /* Input styles */
+  .input-field {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    transition-property: all;
+    transition-duration: 300ms;
+  }
+
+  .input-field:focus {
+    outline: none;
+    border-color: transparent;
+    box-shadow: 0 0 0 2px rgba(140, 82, 255, 0.2);
+  }
+
+  .input-field:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(140, 82, 255, 0.4);
+  }
+
+  /* Gradient backgrounds */
+  .gradient-bg {
+    background: linear-gradient(135deg, #8c52ff 0%, #ff6b00 100%);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #8c52ff 0%, #ff6b00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Animation classes */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce 2s infinite;
+  }
+
+  /* Utility classes */
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .loading-spinner {
+    animation: spin 1s linear infinite;
+    border-radius: 9999px;
+    height: 2rem;
+    width: 2rem;
+    border-bottom-width: 2px;
+    border-color: #8c52ff;
+  }
+
+  /* Responsive font sizes */
+  .text-display {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+  }
+
+  @media (min-width: 640px) {
+    .text-display {
+      font-size: 3rem;
+      line-height: 1;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .text-display {
+      font-size: 3.75rem;
+      line-height: 1;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .text-display {
+      font-size: 4.5rem;
+      line-height: 1;
+    }
+  }
+
+  .text-hero {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+  }
+
+  @media (min-width: 640px) {
+    .text-hero {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .text-hero {
+      font-size: 3rem;
+      line-height: 1;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .text-hero {
+      font-size: 3.75rem;
+      line-height: 1;
+    }
+  }
+
+  .text-section {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+  }
+
+  @media (min-width: 640px) {
+    .text-section {
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .text-section {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    transition-property: all;
+    transition-duration: 300ms;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  .hover-scale {
+    transition-property: all;
+    transition-duration: 300ms;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+
+  .transition-expo {
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+}
+
+@layer utilities {
+
+  /* Custom keyframes */
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    .section-padding {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+  }
+}

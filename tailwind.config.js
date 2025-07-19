@@ -1,0 +1,125 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          DEFAULT: '#8c52ff',
+          50: '#f5f2ff',
+          100: '#ede5ff',
+          200: '#daccff',
+          300: '#c1a5ff',
+          400: '#a47dff',
+          500: '#8c52ff',
+          600: '#7431f5',
+          700: '#6523e0',
+          800: '#531db6',
+          900: '#461c91',
+          dark: '#6d3fcc',
+        },
+        accent: {
+          DEFAULT: '#ff6b00',
+          50: '#fff6eb',
+          100: '#ffeac8',
+          200: '#ffd89b',
+          300: '#ffc26d',
+          400: '#ff9d33',
+          500: '#ff8c00',
+          600: '#ff6b00',
+          700: '#cc5600',
+          800: '#a34500',
+          900: '#7a3400',
+          dark: '#cc5600',
+        },
+        neutral: {
+          50: '#f8f9fa',
+          100: '#e9ecef',
+          200: '#dee2e6',
+          300: '#ced4da',
+          400: '#adb5bd',
+          500: '#6c757d',
+          600: '#495057',
+          700: '#343a40',
+          800: '#212529',
+          900: '#1a1d20',
+        },
+      },
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif'],
+        serif: ['Montserrat', 'serif'],
+      },
+      boxShadow: {
+        subtle: '0 4px 12px rgba(0, 0, 0, 0.05)',
+        card: '0 8px 24px rgba(140, 82, 255, 0.08)',
+        'card-hover': '0 12px 32px rgba(140, 82, 255, 0.12)',
+        premium: '0 10px 30px -5px rgba(140, 82, 255, 0.25)',
+        'premium-hover': '0 20px 40px -5px rgba(140, 82, 255, 0.3)',
+        accent: '0 8px 24px rgba(255, 107, 0, 0.15)',
+        'accent-hover': '0 12px 32px rgba(255, 107, 0, 0.2)',
+      },
+      borderRadius: {
+        xl: '0.75rem',
+        '2xl': '1rem',
+        '3xl': '1.5rem',
+        '4xl': '2rem',
+      },
+      transitionTimingFunction: {
+        'out-expo': 'cubic-bezier(0.19, 1, 0.22, 1)',
+        premium: 'cubic-bezier(0.22, 1, 0.36, 1)',
+      },
+      animation: {
+        float: 'float 6s ease-in-out infinite',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'bounce-slow': 'bounce 3s infinite',
+        shimmer: 'shimmer 2s infinite linear',
+        'spin-slow': 'spin 4s linear infinite',
+        'ping-slow': 'ping 3s cubic-bezier(0, 0, 0.2, 1) infinite',
+        gradient: 'gradient 8s linear infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-1000px 0' },
+          '100%': { backgroundPosition: '1000px 0' },
+        },
+        gradient: {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+        },
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic':
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'hero-pattern': "url('/assets/patterns/hero-bg.svg')",
+      },
+      spacing: {
+        72: '18rem',
+        84: '21rem',
+        96: '24rem',
+        128: '32rem',
+      },
+      zIndex: {
+        60: '60',
+        70: '70',
+        80: '80',
+        90: '90',
+        100: '100',
+      },
+    },
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '1rem',
+        sm: '2rem',
+        lg: '3rem',
+        xl: '4rem',
+      },
+    },
+  },
+  plugins: [],
+};
