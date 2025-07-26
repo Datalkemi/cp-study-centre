@@ -33,9 +33,10 @@ import {
 import { Link } from 'react-router-dom';
 
 const bgImages = [
-  '/assets/hero-scroll/image1.webp',
-  '/assets/hero-scroll/image2.webp',
-  '/assets/hero-scroll/image3.webp',
+  './assets/hero-scroll/image1.webp',
+  './assets/hero-scroll/image2.webp',
+  './assets/hero-scroll/image3.webp',
+  './assets/hero-scroll/image4.webp',
 ];
 
 
@@ -112,7 +113,7 @@ const Home = () => {
         'Homework assistance & doubt clearing',
       ],
       path: '/school-tuition',
-      color: 'from-blue-600 to-indigo-700',
+      color: 'from-blue-600 to-indigo-400',
       iconBg: 'bg-blue-500',
     },
     {
@@ -126,7 +127,7 @@ const Home = () => {
         'Guaranteed score improvement',
       ],
       path: '/language-prep',
-      color: 'from-purple-600 to-primary',
+      color: 'from-purple-600 to-pink-300',
       iconBg: 'bg-primary',
     },
     {
@@ -140,10 +141,12 @@ const Home = () => {
         'Placement assistance',
       ],
       path: '/skill-courses',
-      color: 'from-amber-500 to-accent',
+      color: 'from-amber-600 to-yellow-400',
       iconBg: 'bg-accent',
     },
   ];
+
+
 
   // Testimonials data
   const testimonials = [
@@ -152,7 +155,7 @@ const Home = () => {
       role: 'CBSE Grade 10 Student',
       content:
         'The teaching approach at CP Study Center helped me secure 95% in my board exams. The personalized attention from teachers made complex subjects easy to understand.',
-      image: '/public/images/testimonial1.jpg',
+      image: '#',
       rating: 5,
     },
     {
@@ -160,7 +163,7 @@ const Home = () => {
       role: 'IELTS Student',
       content:
         'I achieved a band score of 7.5 in IELTS after just 6 weeks of training. The mock tests and speaking sessions were incredibly helpful in building my confidence.',
-      image: '/public/images/testimonial2.jpg',
+      image: '#',
       rating: 5,
     },
     {
@@ -168,17 +171,31 @@ const Home = () => {
       role: 'Parent',
       content:
         'My daughter has shown remarkable improvement in her academics since joining CP Study Center. The regular progress reports and parent-teacher meetings keep us informed about her development.',
-      image: '/public/images/testimonial3.jpg',
+      image: '#',
       rating: 4,
     },
   ];
 
+  const getInitials = (name) => {
+    return name
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .toUpperCase();
+  };
+
+  const avatarColors = ['bg-red-400', 'bg-green-400', 'bg-blue-400', 'bg-yellow-400', 'bg-purple-400'];
+
+  const getColor = (index) => {
+    return avatarColors[index % avatarColors.length];
+  };
+
   // Stats
   const stats = [
-    { value: '95%', label: 'Success Rate', icon: TrendingUp },
-    { value: '5000+', label: 'Students Trained', icon: Users },
-    { value: '120+', label: 'Expert Tutors', icon: Award },
-    { value: '15+', label: 'Years Experience', icon: Clock },
+    { value: '98%', label: 'Success Rate', icon: TrendingUp },
+    { value: '1000+', label: 'Students Trained', icon: Users },
+    { value: '20+', label: 'Expert Tutors', icon: Award },
+    { value: '5+', label: 'Years Experience', icon: Clock },
   ];
 
   // Animation variants
@@ -240,7 +257,7 @@ const Home = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentBgIndex((prev) => (prev + 1) % bgImages.length);
-    }, 5000);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
@@ -248,18 +265,7 @@ const Home = () => {
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 md:pt-28 md:pb-24 overflow-hidden">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={bgImages[currentBgIndex]}
-            className="absolute inset-0 -z-20 bg-cover bg-center transition-opacity duration-1000"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            style={{
-              backgroundImage: `url(${bgImages[currentBgIndex]})`,
-            }}
-          />
-        </AnimatePresence>
+
         {/* Background Elements */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
@@ -289,7 +295,25 @@ const Home = () => {
           />
         </div>
 
+        {/* Slideshow Background */}s
+        <div className="absolute inset-0 overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={bgImages[currentBgIndex]}
+              src={bgImages[currentBgIndex]}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.5 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              className="w-full h-full object-cover absolute inset-0"
+              alt="Hero background"
+            />
+          </AnimatePresence>
+          <div className="absolute inset-0 bg-white/70"></div> {/* overlay */}
+        </div>
+
         <div className="container mx-auto px-4 relative z-10">
+
           <div className="flex flex-col lg:flex-row items-center">
             {/* Hero Content */}
             <div className="lg:w-1/2 lg:pr-8 mb-10 lg:mb-0">
@@ -312,14 +336,14 @@ const Home = () => {
                   className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-neutral-900 leading-tight"
                 >
                   <span className="block">Unlock Your</span>
-                  <span className="text-[#8c52ff] bg-clip-text bg-gradient-to-r from-primary to-accent">
+                  <span className="text-[#8c52ff] text-shadow-md bg-clip-text bg-gradient-to-r from-primary to-accent">
                     Academic Potential
                   </span>
                 </motion.h1>
 
                 <motion.p
                   variants={fadeInUpVariants}
-                  className="text-lg text-neutral-600 max-w-lg"
+                  className="text-lg text-black max-w-lg"
                 >
                   Expert-led, personalized education for school students,
                   language learners, and skill development. Join a community
@@ -375,13 +399,14 @@ const Home = () => {
                   </div>
                   <div className="text-sm text-neutral-500">
                     <span className="font-semibold text-neutral-800">
-                      5,000+
+                      1,000+
                     </span>{' '}
                     students trust us
                   </div>
                 </motion.div>
               </motion.div>
             </div>
+
 
             {/* Hero Image/Animation */}
             <motion.div
@@ -394,6 +419,7 @@ const Home = () => {
               }}
               className="lg:w-1/2"
             >
+
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl transform rotate-3 scale-105 blur-lg"></div>
                 <div className="relative bg-white p-6 md:p-8 rounded-2xl shadow-premium border border-neutral-100">
@@ -474,7 +500,7 @@ const Home = () => {
                             Top Results
                           </div>
                           <h3 className="font-bold text-neutral-800 text-xl mt-0.5">
-                            95% Success Rate
+                            98% Success Rate
                           </h3>
                           <p className="text-xs text-neutral-600 mt-1">
                             Students achieving their target scores & grades
@@ -495,9 +521,9 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <motion.div
             style={{ opacity, y, scale }}
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-center max-w-4xl mx-auto mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className=" text-shadow-md text-3xl md:text-4xl font-bold mb-3">
               Our Premium Educational Services
             </h2>
             <p className="text-neutral-600">
@@ -561,7 +587,7 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-neutral-400 text-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -573,13 +599,13 @@ const Home = () => {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 className="text-center"
               >
-                <div className="mx-auto w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4">
-                  <stat.icon className="w-6 h-6" />
+                <div className="mx-auto w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
+                  <stat.icon className="w-8 h-8" />
                 </div>
-                <h3 className="text-3xl font-bold text-neutral-800 mb-1">
+                <h3 className="text-4xl font-extrabold text-white mb-1">
                   {stat.value}
                 </h3>
-                <p className="text-neutral-500">{stat.label}</p>
+                <p className="text-neutral-200">{stat.label}</p>
               </motion.div>
             ))}
           </div>
@@ -589,8 +615,8 @@ const Home = () => {
       {/* Testimonials Section */}
       <section className="py-20 bg-gradient-to-b from-neutral-50 to-white">
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <div className="text-center max-w-4xl mx-auto mb-16">
+            <h2 className="text-neutral-700 text-shadow-md text-3xl md:text-5xl font-bold mb-4">
               What Our Students Say
             </h2>
             <p className="text-neutral-600">
@@ -611,15 +637,9 @@ const Home = () => {
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 rounded-full bg-neutral-200 overflow-hidden">
-                    {testimonial.image ? (
-                      <img
-                        src={testimonial.image}
-                        alt={testimonial.name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-primary to-accent"></div>
-                    )}
+                    <div className={`w-full h-full flex items-center justify-center text-white font-semibold ${getColor(index)}`}>
+                      {getInitials(testimonial.name)}
+                    </div>
                   </div>
                   <div>
                     <h4 className="font-bold text-neutral-800">
@@ -652,10 +672,10 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-accent text-white">
+      <section className="py-20 text-white bg-neutral-200 ">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-            <div className="md:w-2/3">
+          <div className="flex flex-col  md:flex-row md:items-center justify-between gap-8">
+            <div className="md:w-3/4">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -669,20 +689,20 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-white/90 max-w-xl"
+                className="text-black"
               >
                 Join CP Study Center today and experience the difference our
                 expert-led, personalized approach can make in your academic
                 success.
               </motion.p>
             </div>
-            <div className="md:w-1/3 flex flex-col md:items-end">
+            <div className="md:w-1/4 flex flex-col md:items-end">
               <motion.button
                 variants={buttonVariants}
                 initial="rest"
                 whileHover="hover"
                 whileTap="tap"
-                className="px-8 py-4 bg-white text-primary rounded-xl font-medium shadow-xl shadow-primary-dark/20 inline-flex items-center justify-center gap-2"
+                className="px-8 py-4 bg-white text-[#8c52ff] rounded-xl font-medium shadow-xl shadow-primary-dark/20 inline-flex items-center justify-center gap-2"
                 onClick={() => setShowEnquiryForm(true)}
               >
                 <span>Get Started Today</span>
