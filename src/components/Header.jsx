@@ -13,6 +13,8 @@ import {
   Sparkles,
 } from 'lucide-react';
 
+import Logo from '/assets/logo.png';
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -155,11 +157,10 @@ const Header = () => {
 
   return (
     <motion.header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-neutral-100'
-          : 'bg-transparent'
-      }`}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
+        ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-neutral-100'
+        : 'bg-transparent'
+        }`}
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -175,28 +176,11 @@ const Header = () => {
             <motion.div
               variants={logoVariants}
               whileHover="hover"
-              className="w-10 h-10 bg-gradient-to-br from-[#8c52ff] to-[#6d3fcc] rounded-xl flex items-center justify-center shadow-lg shadow-[#8c52ff]/20"
+              className="bg-gradient-to-br rounded-xl flex items-center justify-center"
             >
-              <Sparkles className="w-5 h-5 text-white" />
+              <img src={Logo} alt="CP Study Center Logo" className="h-25" />
             </motion.div>
-            <div>
-              <motion.h2
-                className="text-xl font-extrabold text-black group-hover:text-[#8c52ff] transition-colors tracking-tight"
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2, duration: 0.4 }}
-              >
-                CP Study Center
-              </motion.h2>
-              <motion.p
-                className="text-xs text-neutral-500 -mt-0.5 font-medium"
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3, duration: 0.4 }}
-              >
-                Excellence in Education
-              </motion.p>
-            </div>
+
           </Link>
 
           {/* Desktop Navigation */}
@@ -206,11 +190,10 @@ const Header = () => {
                 {item.dropdown ? (
                   <div>
                     <motion.button
-                      className={`flex items-center space-x-1.5 px-4 py-2.5 rounded-lg font-medium transition-all duration-200 ${
-                        isActive(item.path)
-                          ? 'text-[#8c52ff] bg-[#8c52ff]/5'
-                          : 'text-neutral-700 hover:text-[#8c52ff] hover:bg-[#8c52ff]/5'
-                      }`}
+                      className={`flex items-center space-x-1.5 px-4 py-2.5 rounded-lg font-medium transition-all duration-200 ${isActive(item.path)
+                        ? 'text-[#8c52ff] bg-[#8c52ff]/5'
+                        : 'text-neutral-700 hover:text-[#8c52ff] hover:bg-[#8c52ff]/5'
+                        }`}
                       onClick={() => handleDropdownToggle(item.name)}
                       variants={menuItemVariants}
                       custom={index}
@@ -260,11 +243,10 @@ const Header = () => {
                 ) : (
                   <Link
                     to={item.path}
-                    className={`px-4 py-2.5 rounded-lg font-medium transition-all duration-200 ${
-                      isActive(item.path)
-                        ? 'text-[#8c52ff] bg-[#8c52ff]/5'
-                        : 'text-neutral-700 hover:text-[#8c52ff] hover:bg-[#8c52ff]/5'
-                    }`}
+                    className={`px-4 py-2.5 rounded-lg font-medium transition-all duration-200 ${isActive(item.path)
+                      ? 'text-[#8c52ff] bg-[#8c52ff]/5'
+                      : 'text-neutral-700 hover:text-[#8c52ff] hover:bg-[#8c52ff]/5'
+                      }`}
                   >
                     <motion.span
                       variants={menuItemVariants}
@@ -326,11 +308,10 @@ const Header = () => {
                         <div>
                           <button
                             onClick={() => handleDropdownToggle(item.name)}
-                            className={`w-full flex items-center justify-between py-3.5 px-5 rounded-xl ${
-                              isActive(item.path)
-                                ? 'bg-[#8c52ff]/5 text-[#8c52ff] shadow-sm'
-                                : 'hover:bg-neutral-50'
-                            }`}
+                            className={`w-full flex items-center justify-between py-3.5 px-5 rounded-xl ${isActive(item.path)
+                              ? 'bg-[#8c52ff]/5 text-[#8c52ff] shadow-sm'
+                              : 'hover:bg-neutral-50'
+                              }`}
                           >
                             <div className="flex items-center space-x-3.5">
                               {item.icon && <item.icon className="w-5 h-5" />}
@@ -377,11 +358,10 @@ const Header = () => {
                         <Link
                           to={item.path}
                           onClick={closeMenu}
-                          className={`flex items-center space-x-3.5 py-3.5 px-5 rounded-xl ${
-                            isActive(item.path)
-                              ? 'bg-[#8c52ff]/5 text-[#8c52ff] shadow-sm'
-                              : 'hover:bg-neutral-50'
-                          }`}
+                          className={`flex items-center space-x-3.5 py-3.5 px-5 rounded-xl ${isActive(item.path)
+                            ? 'bg-[#8c52ff]/5 text-[#8c52ff] shadow-sm'
+                            : 'hover:bg-neutral-50'
+                            }`}
                         >
                           {item.icon && <item.icon className="w-5 h-5" />}
                           <span className="font-medium">{item.name}</span>

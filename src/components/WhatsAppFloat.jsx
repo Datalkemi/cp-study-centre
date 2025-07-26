@@ -204,8 +204,8 @@ const WhatsAppFloat = () => {
                 initial={{ opacity: 0, scale: 0.8, y: -5 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.8, y: -5 }}
-                transition={{ delay: 0.5, duration: 0.3 }}
-                className="absolute bottom-16 right-0 bg-white px-4 py-2 rounded-lg shadow-md max-w-[200px] text-center text-sm text-neutral-700 font-medium border border-neutral-100"
+                transition={{ delay: 0.1, duration: 0.3 }}
+                className="absolute bottom-16 right-0 bg-white px-3 py-3 rounded-lg shadow-md w-[180px] text-center text-sm text-neutral-700 font-medium border border-neutral-100"
               >
                 Need help? Tap to connect with us!
                 <div className="absolute bottom-[-6px] right-[18px] w-3 h-3 bg-white rotate-45 border-r border-b border-neutral-100"></div>

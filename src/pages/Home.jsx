@@ -32,6 +32,13 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+const bgImages = [
+  '/assets/hero-scroll/image1.webp',
+  '/assets/hero-scroll/image2.webp',
+  '/assets/hero-scroll/image3.webp',
+];
+
+
 const Home = () => {
   const [showEnquiryForm, setShowEnquiryForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -228,10 +235,31 @@ const Home = () => {
     tap: { scale: 0.95 },
   };
 
+  const [currentBgIndex, setCurrentBgIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBgIndex((prev) => (prev + 1) % bgImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 md:pt-28 md:pb-24 overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={bgImages[currentBgIndex]}
+            className="absolute inset-0 -z-20 bg-cover bg-center transition-opacity duration-1000"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{
+              backgroundImage: `url(${bgImages[currentBgIndex]})`,
+            }}
+          />
+        </AnimatePresence>
         {/* Background Elements */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
@@ -455,21 +483,6 @@ const Home = () => {
                       </div>
                     </motion.div>
                   </div>
-
-                  {/* CTA Bar */}
-                  <div className="mt-5 bg-gradient-to-r from-primary to-accent p-4 rounded-xl text-white flex items-center justify-between">
-                    <div className="font-medium">Ready to excel?</div>
-                    <motion.button
-                      variants={buttonVariants}
-                      initial="rest"
-                      whileHover="hover"
-                      whileTap="tap"
-                      className="px-4 py-2 bg-white text-primary rounded-lg font-medium text-sm"
-                      onClick={() => setShowEnquiryForm(true)}
-                    >
-                      Start Now
-                    </motion.button>
-                  </div>
                 </div>
               </div>
             </motion.div>
@@ -622,11 +635,10 @@ const Home = () => {
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={`w-4 h-4 ${
-                        i < testimonial.rating
-                          ? 'text-amber-400'
-                          : 'text-neutral-200'
-                      }`}
+                      className={`w-4 h-4 ${i < testimonial.rating
+                        ? 'text-amber-400'
+                        : 'text-neutral-200'
+                        }`}
                       fill={i < testimonial.rating ? '#FBBF24' : '#E5E7EB'}
                     />
                   ))}

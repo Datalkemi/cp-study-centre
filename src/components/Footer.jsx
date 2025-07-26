@@ -18,6 +18,9 @@ import {
   Sparkles,
 } from 'lucide-react';
 
+import LogoWithBG from '/assets/logo_with_bg.png';
+import Logo from '/assets/logo.png';
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -150,17 +153,7 @@ const Footer = () => {
           {/* Company Info */}
           <motion.div variants={itemVariants} className="space-y-6">
             <Link to="/" className="flex items-center space-x-4 group">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#8c52ff] to-[#ff6b00] rounded-xl flex items-center justify-center shadow-lg shadow-[#8c52ff]/30">
-                <Sparkles className="w-7 h-7 text-white" />
-              </div>
-              <div>
-                <h2 className="text-xl font-bold text-white group-hover:text-[#8c52ff] transition-colors">
-                  CP Study Center
-                </h2>
-                <p className="text-xs text-neutral-400">
-                  Excellence in Education
-                </p>
-              </div>
+              <img src={Logo} alt="CP Study Center Logo" className="w-auto bg-white rounded-xl" />
             </Link>
 
             <p className="text-neutral-300">
@@ -199,8 +192,8 @@ const Footer = () => {
 
           {/* Quick Links */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-lg font-bold mb-7 flex items-center">
-              <span className="w-8 h-[3px] bg-[#ff6b00] rounded-full mr-3"></span>
+            <h3 className="text-lg text-white font-bold mb-7 flex items-center">
+              <span className="w-8 h-[3px] bg-[#8c52ff] rounded-full mr-3"></span>
               Quick Links
             </h3>
             <ul className="space-y-3.5">
@@ -210,7 +203,7 @@ const Footer = () => {
                     to={link.path}
                     className="flex items-center text-neutral-300 hover:text-[#8c52ff] transition-colors group"
                   >
-                    <motion.span variants={linkVariants}>
+                    <motion.span variants={linkVariants} className="flex items-center">
                       <ChevronRight
                         size={16}
                         className="mr-2.5 text-neutral-500 group-hover:text-[#8c52ff] transition-colors"
@@ -225,8 +218,8 @@ const Footer = () => {
 
           {/* Courses */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-lg font-bold mb-7 flex items-center">
-              <span className="w-8 h-[3px] bg-[#ff6b00] rounded-full mr-3"></span>
+            <h3 className="text-lg text-white font-bold mb-7 flex items-center">
+              <span className="w-8 h-[3px] bg-[#8c52ff] rounded-full mr-3"></span>
               Our Courses
             </h3>
             <ul className="space-y-3.5">
@@ -236,7 +229,8 @@ const Footer = () => {
                     to={course.path}
                     className="flex items-center text-neutral-300 hover:text-[#8c52ff] transition-colors group"
                   >
-                    <motion.span variants={linkVariants}>
+                    <motion.span variants={linkVariants}
+                      className="flex items-center">
                       <ChevronRight
                         size={16}
                         className="mr-2.5 text-neutral-500 group-hover:text-[#8c52ff] transition-colors"
@@ -251,8 +245,8 @@ const Footer = () => {
 
           {/* Contact */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-lg font-bold mb-7 flex items-center">
-              <span className="w-8 h-[3px] bg-[#ff6b00] rounded-full mr-3"></span>
+            <h3 className="text-lg text-white font-bold mb-7 flex items-center">
+              <span className="w-8 h-[3px] bg-[#8c52ff] rounded-full mr-3"></span>
               Contact Us
             </h3>
             <ul className="space-y-4.5">
@@ -261,9 +255,8 @@ const Footer = () => {
                   <motion.a
                     href={item.href}
                     whileHover={{ x: 5 }}
-                    className={`flex items-center text-neutral-300 hover:text-white ${
-                      !item.href && 'pointer-events-none'
-                    }`}
+                    className={`flex items-center text-neutral-300 hover:text-white ${!item.href && 'pointer-events-none'
+                      }`}
                   >
                     <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mr-3.5 text-[#8c52ff]">
                       <item.icon size={18} />
@@ -274,26 +267,27 @@ const Footer = () => {
               ))}
             </ul>
 
-            {/* Newsletter mini form */}
-            <div className="mt-8 bg-neutral-800/50 p-5 rounded-xl border border-neutral-700/50">
-              <h4 className="text-sm font-medium mb-3.5">
-                Subscribe to newsletter
-              </h4>
-              <form className="flex">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="flex-grow px-4 py-2.5 text-sm bg-neutral-700 rounded-l-lg focus:outline-none focus:ring-1 focus:ring-[#8c52ff] text-white"
-                />
-                <button
-                  type="submit"
-                  className="bg-gradient-to-r from-[#8c52ff] to-[#7946e0] hover:from-[#9a69ff] hover:to-[#8351f8] px-4 py-2.5 rounded-r-lg transition-colors"
-                >
-                  <ArrowRight size={18} />
-                </button>
-              </form>
-            </div>
+
           </motion.div>
+        </div>
+        {/* Newsletter mini form */}
+        <div className="mt-8 bg-neutral-800/50 p-5 rounded-xl border border-neutral-700/50 min-w-[400px] max-w-md mx-auto">
+          <h4 className="text-white text-sm font-medium mb-3.5">
+            Subscribe to our newsletter
+          </h4>
+          <form className="flex">
+            <input
+              type="email"
+              placeholder="Your email"
+              className="flex-grow px-4 py-2.5 text-sm bg-neutral-700 rounded-l-lg focus:outline-none focus:ring-1 focus:ring-[#8c52ff] text-white"
+            />
+            <button
+              type="submit"
+              className="bg-gradient-to-r from-[#8c52ff] to-[#7946e0] hover:from-[#9a69ff] hover:to-[#8351f8] px-4 py-2.5 rounded-r-lg transition-colors"
+            >
+              <ArrowRight size={18} />
+            </button>
+          </form>
         </div>
 
         {/* Bottom bar */}
