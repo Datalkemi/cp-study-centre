@@ -271,7 +271,7 @@ const Footer = () => {
           </motion.div>
         </div>
         {/* Newsletter mini form */}
-        <div className="mt-8 bg-neutral-800/50 p-5 rounded-xl border border-neutral-700/50 min-w-[400px] max-w-md mx-auto">
+        <div className="mt-8 bg-neutral-800/50 p-5 rounded-xl border border-neutral-700/50 min-w-[300px] md:min-w-[400px] max-w-s md:max-w-md mx-auto">
           <h4 className="text-white text-sm font-medium mb-3.5">
             Subscribe to our newsletter
           </h4>
@@ -294,6 +294,16 @@ const Footer = () => {
         <div className="mt-16 pt-8 border-t border-neutral-800 text-neutral-400 text-sm flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             © {currentYear} CP Study Center. All rights reserved.
+          </div>
+          <div className="mb-4 md:mb-0">
+            Powered by <a
+              href="https://www.Datalkemi.com/"
+              className="text-[#8c52ff]"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Datalkemi
+            </a>
           </div>
 
           <div className="flex space-x-8">

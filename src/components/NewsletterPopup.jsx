@@ -170,9 +170,10 @@ const NewsletterPopup = ({ isOpen, onClose }) => {
                 <motion.div key="subscribe-form">
                   {/* Header */}
                   <div className="bg-gradient-to-r from-[#8c52ff] to-[#ff6b00] p-8 text-white relative overflow-hidden">
+                    {/* Close button */}
                     <button
                       onClick={onClose}
-                      className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-white/20 text-white transition-colors"
+                      className="absolute top-4 right-4 p-2 rounded-full hover:bg-neutral-100/50 text-neutral-500 hover:text-neutral-700 transition-colors z-10"
                     >
                       <X className="w-5 h-5" />
                     </button>
@@ -275,11 +276,10 @@ const NewsletterPopup = ({ isOpen, onClose }) => {
                         animate={isSubmitting ? 'submitting' : 'rest'}
                         type="submit"
                         disabled={isSubmitting}
-                        className={`w-full flex items-center justify-center py-3 px-4 rounded-lg text-white font-medium text-base transition-all duration-200 ${
-                          isSubmitting
-                            ? 'bg-[#8c52ff] cursor-not-allowed opacity-80'
-                            : 'bg-[#8c52ff] hover:bg-[#6d3fcc] shadow-md shadow-[#8c52ff]/20 hover:shadow-lg hover:shadow-[#8c52ff]/30'
-                        }`}
+                        className={`w-full flex items-center justify-center py-3 px-4 rounded-lg text-white font-medium text-base transition-all duration-200 ${isSubmitting
+                          ? 'bg-[#8c52ff] cursor-not-allowed opacity-80'
+                          : 'bg-[#8c52ff] hover:bg-[#6d3fcc] shadow-md shadow-[#8c52ff]/20 hover:shadow-lg hover:shadow-[#8c52ff]/30'
+                          }`}
                       >
                         {isSubmitting ? 'Subscribing...' : 'Subscribe Now'}
                       </motion.button>

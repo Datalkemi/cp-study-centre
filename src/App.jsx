@@ -50,12 +50,12 @@ function App() {
   const [hasInteracted, setHasInteracted] = useState(false);
 
   useEffect(() => {
-    // Show daily learning popup after 8 seconds
+    // Show daily learning popup after 3 seconds
     const dailyTimer = setTimeout(() => {
       if (!hasInteracted) {
         setShowDailyLearning(true);
       }
-    }, 8000);
+    }, 3000);
 
     // Track scroll for newsletter popup
     let hasScrolled70 = false;
@@ -81,7 +81,7 @@ function App() {
         if (!hasScrolled70 && !showDailyLearning) {
           setShowNewsletter(true);
         }
-      }, 15000);
+      }, 8000);
     };
 
     window.addEventListener('scroll', handleScroll);

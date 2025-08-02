@@ -282,7 +282,7 @@ const Home = () => {
             }}
           />
           <motion.div
-            className="absolute top-40 left-10 w-72 h-72 rounded-full bg-accent/10 filter blur-3xl"
+            className="absolute top-40 left-10 w-72 h-72 rounded-full bg-accent/10 filter blur-xl"
             animate={{
               x: [-20, 20, -20],
               y: [20, 0, 20],
@@ -295,7 +295,7 @@ const Home = () => {
           />
         </div>
 
-        {/* Slideshow Background */}s
+        {/* Slideshow Background */}
         <div className="absolute inset-0 overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.img
@@ -309,7 +309,7 @@ const Home = () => {
               alt="Hero background"
             />
           </AnimatePresence>
-          <div className="absolute inset-0 bg-white/70"></div> {/* overlay */}
+          <div className="absolute inset-0 bg-white/10"></div> {/* overlay */}
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -325,25 +325,24 @@ const Home = () => {
               >
                 <motion.div
                   variants={fadeInUpVariants}
-                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium"
+                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/50 text-primary text-md font-medium shadow-sm mb-4"
                 >
-                  <Sparkles className="w-4 h-4" />
                   <span>Excellence in Education Since 2015</span>
                 </motion.div>
 
                 <motion.h1
                   variants={fadeInUpVariants}
-                  className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-neutral-900 leading-tight"
+                  className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-neutral-900 leading-tight  mb-4"
                 >
-                  <span className="block">Unlock Your</span>
-                  <span className="text-[#8c52ff] text-shadow-md bg-clip-text bg-gradient-to-r from-primary to-accent">
+                  <span className="block text-shadow-md text-shadow-white">Unlock Your</span>
+                  <span className="text-[#8c52ff] text-shadow-md text-shadow-white bg-clip-text bg-gradient-to-r from-primary to-accent">
                     Academic Potential
                   </span>
                 </motion.h1>
 
                 <motion.p
                   variants={fadeInUpVariants}
-                  className="text-lg text-black max-w-lg"
+                  className="text-lg text-black max-w-lg md:max-w-2xl font-medium leading-relaxed"
                 >
                   Expert-led, personalized education for school students,
                   language learners, and skill development. Join a community
@@ -354,30 +353,30 @@ const Home = () => {
                   variants={fadeInUpVariants}
                   className="flex flex-col sm:flex-row gap-4 pt-2"
                 >
-                  <motion.button
-                    variants={buttonVariants}
-                    initial="rest"
-                    whileHover="hover"
-                    whileTap="tap"
-                    className="flex items-center justify-center gap-2 px-6 py-3.5 bg-[#8c52ff] hover:bg-primary-dark text-white rounded-xl font-medium transition-all duration-200 shadow-lg shadow-primary/20"
-                    onClick={() => setShowEnquiryForm(true)}
-                  >
-                    <span>Enquire Now</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </motion.button>
-
-                  <Link to="/webinars">
+                  <Link to="/Contact">
                     <motion.button
                       variants={buttonVariants}
                       initial="rest"
                       whileHover="hover"
                       whileTap="tap"
-                      className="flex items-center justify-center gap-2 px-6 py-3.5 bg-white border border-neutral-200 hover:border-primary/30 hover:bg-primary/5 text-neutral-800 rounded-xl font-medium transition-all duration-200"
+                      className="flex items-center justify-center gap-2 px-6 py-3.5 bg-[#8c52ff] hover:bg-primary-dark text-white rounded-xl font-medium transition-all shadow-lg shadow-primary/20"
                     >
-                      <Play className="w-4 h-4 text-primary" />
-                      <span>Join Free Webinar</span>
+                      <span>Enquire Now</span>
+                      <ArrowRight className="w-4 h-4" />
                     </motion.button>
                   </Link>
+
+                  <motion.button
+                    variants={buttonVariants}
+                    initial="rest"
+                    whileHover="hover"
+                    whileTap="tap"
+                    className="flex items-center justify-center gap-2 px-6 py-3.5 bg-white border border-neutral-200 hover:border-primary/30 hover:bg-primary/5 text-neutral-800 rounded-xl font-medium transition-all duration-200"
+                    onClick={() => setShowEnquiryForm(true)}
+                  >
+                    <Play className="w-4 h-4 text-primary" />
+                    <span>Join Our <strong>Free</strong> 3 Day Class</span>
+                  </motion.button>
                 </motion.div>
 
                 <motion.div
@@ -421,8 +420,7 @@ const Home = () => {
             >
 
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl transform rotate-3 scale-105 blur-lg"></div>
-                <div className="relative bg-white p-6 md:p-8 rounded-2xl shadow-premium border border-neutral-100">
+                <div className="relative bg-white/60 p-6 md:p-8 rounded-2xl shadow-premium border border-neutral-100">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     {/* Course card 1 */}
                     <motion.div
@@ -488,18 +486,18 @@ const Home = () => {
 
                     {/* Achievement card */}
                     <motion.div
-                      className="bg-gradient-to-br from-primary/10 to-primary/5 p-5 rounded-xl border border-primary/20 shadow-subtle md:col-span-2"
+                      className="bg-gradient-to-br from-primary/10 to-primary/5 p-5 rounded-xl border border-[#8c52ff] shadow-subtle md:col-span-2"
                       whileHover={{ y: -5, transition: { duration: 0.2 } }}
                     >
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
+                        <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-[#8c52ff]">
                           <Award className="w-6 h-6" />
                         </div>
                         <div>
                           <div className="font-medium text-neutral-600 text-sm">
                             Top Results
                           </div>
-                          <h3 className="font-bold text-neutral-800 text-xl mt-0.5">
+                          <h3 className="font-bold text-[#8c52ff] text-xl mt-0.5">
                             98% Success Rate
                           </h3>
                           <p className="text-xs text-neutral-600 mt-1">
@@ -514,10 +512,10 @@ const Home = () => {
             </motion.div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Services Section */}
-      <section ref={targetRef} className="py-20 bg-neutral-50">
+      < section ref={targetRef} className="py-20 bg-neutral-50" >
         <div className="container mx-auto px-4">
           <motion.div
             style={{ opacity, y, scale }}
@@ -584,10 +582,10 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Stats Section */}
-      <section className="py-16 bg-neutral-400 text-white">
+      < section className="py-16 bg-[#8c52ff] text-white" >
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -599,10 +597,10 @@ const Home = () => {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 className="text-center"
               >
-                <div className="mx-auto w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
-                  <stat.icon className="w-8 h-8" />
+                <div className="mx-auto w-14 h-14 rounded-full flex items-center justify-center text-primary mb-2">
+                  <stat.icon className="w-10 h-10" />
                 </div>
-                <h3 className="text-4xl font-extrabold text-white mb-1">
+                <h3 className="text-4xl font-extrabold text-black mb-1">
                   {stat.value}
                 </h3>
                 <p className="text-neutral-200">{stat.label}</p>
@@ -610,10 +608,10 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-gradient-to-b from-neutral-50 to-white">
+      < section className="py-20 bg-gradient-to-b from-neutral-50 to-white" >
         <div className="container mx-auto px-4">
           <div className="text-center max-w-4xl mx-auto mb-16">
             <h2 className="text-neutral-700 text-shadow-md text-3xl md:text-5xl font-bold mb-4">
@@ -669,18 +667,18 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section >
 
       {/* CTA Section */}
-      <section className="py-20 text-white bg-neutral-200 ">
+      < section className="py-20 text-white bg-neutral-400 " >
         <div className="container mx-auto px-4">
-          <div className="flex flex-col  md:flex-row md:items-center justify-between gap-8">
-            <div className="md:w-3/4">
+          <div className="flex flex-col items-center text-center lg:flex-row lg:items-start lg:text-left lg:justify-between gap-6 w-full">
+            <div className="w-full lg:w-3/4">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-3xl md:text-4xl font-bold mb-4"
+                className="text-3xl lg:text-4xl text-white font-bold mb-4"
               >
                 Ready to Start Your Learning Journey?
               </motion.h2>
@@ -689,14 +687,13 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-black"
+                className="text-white"
               >
-                Join CP Study Center today and experience the difference our
-                expert-led, personalized approach can make in your academic
-                success.
+                Join CP Study Center today and experience the difference our expert-led, personalized approach can make in your academic success.
               </motion.p>
             </div>
-            <div className="md:w-1/4 flex flex-col md:items-end">
+
+            <div className="w-full lg:w-1/4 flex justify-center lg:justify-end mt-6 lg:mt-0">
               <motion.button
                 variants={buttonVariants}
                 initial="rest"
@@ -711,16 +708,16 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Enquiry Form Modal */}
-      <AnimatePresence>
+      < AnimatePresence >
         {showEnquiryForm && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-8"
             onClick={() => setShowEnquiryForm(false)}
           >
             <motion.div
@@ -735,26 +732,26 @@ const Home = () => {
               <div className="bg-gradient-to-r from-primary to-accent p-6 text-white relative">
                 <button
                   onClick={() => setShowEnquiryForm(false)}
-                  className="absolute top-4 right-4 p-1.5 hover:bg-white/20 rounded-full transition-colors"
+                  className="absolute top-4 right-4 p-1.5 hover:bg-black/20 rounded-full transition-colors"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-6 h-6 text-black" />
                 </button>
                 <h3 className="text-2xl font-bold mb-2">Enquire Now</h3>
-                <p className="text-white/90">
+                <p className="text-black/90">
                   Fill out the form below and our team will get in touch with
                   you shortly
                 </p>
               </div>
 
               {/* Form Content */}
-              <div className="p-6">
+              <div className="px-6 ">
                 <form
                   onSubmit={handleFormSubmit}
                   className="grid grid-cols-1 md:grid-cols-2 gap-6"
                 >
                   {/* Basic Info */}
                   <div className="space-y-4 md:col-span-2">
-                    <h4 className="font-medium text-lg text-neutral-800 mb-2">
+                    <h4 className="font-medium text-lg text-[#8c52ff] mb-2">
                       Your Information
                     </h4>
                     <div>
@@ -986,15 +983,15 @@ const Home = () => {
                       whileHover="hover"
                       whileTap="tap"
                       type="submit"
-                      className="w-full py-4 bg-primary hover:bg-primary-dark text-white rounded-xl font-medium transition-all duration-200 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30"
+                      className="w-full py-4 bg-[#8c52ff] hover:bg-primary-dark text-white rounded-xl font-medium transition-all duration-200 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30"
                     >
                       Submit Enquiry
                     </motion.button>
-                    <p className="text-xs text-neutral-500 text-center mt-4">
+                    <p className="text-xs text-neutral-500 text-center mt-4 pb-5">
                       By submitting this form, you agree to our{' '}
                       <Link
                         to="/privacy-policy"
-                        className="text-primary hover:underline"
+                        className="text-[#8c52ff] hover:underline"
                       >
                         privacy policy
                       </Link>
@@ -1006,8 +1003,8 @@ const Home = () => {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
-    </div>
+      </AnimatePresence >
+    </div >
   );
 };
 
