@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  motion,
+  motion as Motion,
   useScroll,
   useTransform,
   AnimatePresence,
@@ -269,7 +269,7 @@ const Home = () => {
         {/* Background Elements */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
-          <motion.div
+          <Motion.div
             className="absolute top-20 right-10 w-64 h-64 rounded-full bg-primary/10 filter blur-3xl"
             animate={{
               x: [20, -20, 20],
@@ -281,7 +281,7 @@ const Home = () => {
               repeatType: 'reverse',
             }}
           />
-          <motion.div
+          <Motion.div
             className="absolute top-40 left-10 w-72 h-72 rounded-full bg-accent/10 filter blur-xl"
             animate={{
               x: [-20, 20, -20],
@@ -298,7 +298,7 @@ const Home = () => {
         {/* Slideshow Background */}
         <div className="absolute inset-0 overflow-hidden">
           <AnimatePresence mode="wait">
-            <motion.img
+            <Motion.img
               key={bgImages[currentBgIndex]}
               src={bgImages[currentBgIndex]}
               initial={{ opacity: 0 }}
@@ -317,20 +317,20 @@ const Home = () => {
           <div className="flex flex-col lg:flex-row items-center">
             {/* Hero Content */}
             <div className="lg:w-1/2 lg:pr-8 mb-10 lg:mb-0">
-              <motion.div
+              <Motion.div
                 className="space-y-6"
                 initial="hidden"
                 animate="visible"
                 variants={staggerContainerVariants}
               >
-                <motion.div
+                <Motion.div
                   variants={fadeInUpVariants}
                   className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/50 text-primary text-md font-medium shadow-sm mb-4"
                 >
                   <span>Excellence in Education Since 2015</span>
-                </motion.div>
+                </Motion.div>
 
-                <motion.h1
+                <Motion.h1
                   variants={fadeInUpVariants}
                   className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-neutral-900 leading-tight  mb-4"
                 >
@@ -338,23 +338,23 @@ const Home = () => {
                   <span className="text-[#8c52ff] text-shadow-md text-shadow-white bg-clip-text bg-gradient-to-r from-primary to-accent">
                     Academic Potential
                   </span>
-                </motion.h1>
+                </Motion.h1>
 
-                <motion.p
+                <Motion.p
                   variants={fadeInUpVariants}
                   className="text-lg text-black max-w-lg md:max-w-2xl font-medium leading-relaxed"
                 >
                   Expert-led, personalized education for school students,
                   language learners, and skill development. Join a community
                   where success is the standard.
-                </motion.p>
+                </Motion.p>
 
-                <motion.div
+                <Motion.div
                   variants={fadeInUpVariants}
                   className="flex flex-col sm:flex-row gap-4 pt-2"
                 >
                   <Link to="/Contact">
-                    <motion.button
+                    <Motion.button
                       variants={buttonVariants}
                       initial="rest"
                       whileHover="hover"
@@ -363,10 +363,10 @@ const Home = () => {
                     >
                       <span>Enquire Now</span>
                       <ArrowRight className="w-4 h-4" />
-                    </motion.button>
+                    </Motion.button>
                   </Link>
 
-                  <motion.button
+                  <Motion.button
                     variants={buttonVariants}
                     initial="rest"
                     whileHover="hover"
@@ -376,10 +376,10 @@ const Home = () => {
                   >
                     <Play className="w-4 h-4 text-primary" />
                     <span>Join Our <strong>Free</strong> 3 Day Class</span>
-                  </motion.button>
-                </motion.div>
+                  </Motion.button>
+                </Motion.div>
 
-                <motion.div
+                <Motion.div
                   variants={fadeInUpVariants}
                   className="flex flex-wrap gap-6 pt-6 items-center"
                 >
@@ -402,13 +402,13 @@ const Home = () => {
                     </span>{' '}
                     students trust us
                   </div>
-                </motion.div>
-              </motion.div>
+                </Motion.div>
+              </Motion.div>
             </div>
 
 
             {/* Hero Image/Animation */}
-            <motion.div
+            <Motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{
@@ -423,7 +423,7 @@ const Home = () => {
                 <div className="relative bg-white/60 p-6 md:p-8 rounded-2xl shadow-premium border border-neutral-100">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     {/* Course card 1 */}
-                    <motion.div
+                    <Motion.div
                       className="bg-gradient-to-b from-neutral-50 to-white p-5 rounded-xl border border-neutral-100 shadow-subtle"
                       whileHover={{ y: -5, transition: { duration: 0.2 } }}
                     >
@@ -451,10 +451,10 @@ const Home = () => {
                           </div>
                         </div>
                       </div>
-                    </motion.div>
+                    </Motion.div>
 
                     {/* Course card 2 */}
-                    <motion.div
+                    <Motion.div
                       className="bg-gradient-to-b from-neutral-50 to-white p-5 rounded-xl border border-neutral-100 shadow-subtle"
                       whileHover={{ y: -5, transition: { duration: 0.2 } }}
                     >
@@ -482,10 +482,10 @@ const Home = () => {
                           </div>
                         </div>
                       </div>
-                    </motion.div>
+                    </Motion.div>
 
                     {/* Achievement card */}
-                    <motion.div
+                    <Motion.div
                       className="bg-gradient-to-br from-primary/10 to-primary/5 p-5 rounded-xl border border-[#8c52ff] shadow-subtle md:col-span-2"
                       whileHover={{ y: -5, transition: { duration: 0.2 } }}
                     >
@@ -505,11 +505,11 @@ const Home = () => {
                           </p>
                         </div>
                       </div>
-                    </motion.div>
+                    </Motion.div>
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </Motion.div>
           </div>
         </div>
       </section >
@@ -517,7 +517,7 @@ const Home = () => {
       {/* Services Section */}
       < section ref={targetRef} className="py-20 bg-neutral-50" >
         <div className="container mx-auto px-4">
-          <motion.div
+          <Motion.div
             style={{ opacity, y, scale }}
             className="text-center max-w-4xl mx-auto mb-16"
           >
@@ -528,11 +528,11 @@ const Home = () => {
               Comprehensive learning solutions designed to meet your educational
               goals, delivered by experts who care about your success.
             </p>
-          </motion.div>
+          </Motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <motion.div
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service) => (
+              <Motion.div
                 key={service.title}
                 variants={cardHoverVariants}
                 initial="rest"
@@ -569,16 +569,16 @@ const Home = () => {
                 {/* Service CTA */}
                 <div className="p-6 pt-0">
                   <Link to={service.path}>
-                    <motion.button
+                    <Motion.button
                       variants={buttonVariants}
                       className="w-full flex items-center justify-center gap-2 py-3 bg-neutral-100 hover:bg-primary hover:text-white rounded-xl font-medium transition-all duration-300 text-neutral-800"
                     >
                       <span>Explore {service.title}</span>
                       <ChevronRight className="w-4 h-4" />
-                    </motion.button>
+                    </Motion.button>
                   </Link>
                 </div>
-              </motion.div>
+              </Motion.div>
             ))}
           </div>
         </div>
@@ -587,9 +587,9 @@ const Home = () => {
       {/* Stats Section */}
       < section className="py-16 bg-[#8c52ff] text-white" >
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <motion.div
+              <Motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -604,7 +604,7 @@ const Home = () => {
                   {stat.value}
                 </h3>
                 <p className="text-neutral-200">{stat.label}</p>
-              </motion.div>
+              </Motion.div>
             ))}
           </div>
         </div>
@@ -625,7 +625,7 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <motion.div
+              <Motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -663,7 +663,7 @@ const Home = () => {
                 </div>
 
                 <p className="text-neutral-600">"{testimonial.content}"</p>
-              </motion.div>
+              </Motion.div>
             ))}
           </div>
         </div>
@@ -674,15 +674,15 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center text-center lg:flex-row lg:items-start lg:text-left lg:justify-between gap-6 w-full">
             <div className="w-full lg:w-3/4">
-              <motion.h2
+              <Motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 className="text-3xl lg:text-4xl text-white font-bold mb-4"
               >
                 Ready to Start Your Learning Journey?
-              </motion.h2>
-              <motion.p
+              </Motion.h2>
+              <Motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -690,11 +690,11 @@ const Home = () => {
                 className="text-white"
               >
                 Join CP Study Center today and experience the difference our expert-led, personalized approach can make in your academic success.
-              </motion.p>
+              </Motion.p>
             </div>
 
             <div className="w-full lg:w-1/4 flex justify-center lg:justify-end mt-6 lg:mt-0">
-              <motion.button
+              <Motion.button
                 variants={buttonVariants}
                 initial="rest"
                 whileHover="hover"
@@ -704,7 +704,7 @@ const Home = () => {
               >
                 <span>Get Started Today</span>
                 <ArrowRight className="w-5 h-5" />
-              </motion.button>
+              </Motion.button>
             </div>
           </div>
         </div>
@@ -713,14 +713,14 @@ const Home = () => {
       {/* Enquiry Form Modal */}
       < AnimatePresence >
         {showEnquiryForm && (
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-8"
             onClick={() => setShowEnquiryForm(false)}
           >
-            <motion.div
+            <Motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
@@ -977,7 +977,7 @@ const Home = () => {
 
                   {/* Submit Button */}
                   <div className="md:col-span-2 pt-4">
-                    <motion.button
+                    <Motion.button
                       variants={buttonVariants}
                       initial="rest"
                       whileHover="hover"
@@ -986,7 +986,7 @@ const Home = () => {
                       className="w-full py-4 bg-[#8c52ff] hover:bg-primary-dark text-white rounded-xl font-medium transition-all duration-200 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30"
                     >
                       Submit Enquiry
-                    </motion.button>
+                    </Motion.button>
                     <p className="text-xs text-neutral-500 text-center mt-4 pb-5">
                       By submitting this form, you agree to our{' '}
                       <Link
@@ -1000,8 +1000,8 @@ const Home = () => {
                   </div>
                 </form>
               </div>
-            </motion.div>
-          </motion.div>
+            </Motion.div>
+          </Motion.div>
         )}
       </AnimatePresence >
     </div >
