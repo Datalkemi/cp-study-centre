@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Menu,
@@ -19,6 +20,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const dropdownRef = useRef(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -42,6 +44,19 @@ const Header = () => {
   const handleDropdownToggle = (dropdown) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setActiveDropdown(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [activeDropdown]);
 
   const navItems = [
     { name: 'Home', path: '/', icon: null },
@@ -188,7 +203,7 @@ const Header = () => {
             {navItems.map((item, index) => (
               <div key={item.name} className="relative group">
                 {item.dropdown ? (
-                  <div>
+                  <div ref={item.name === 'Courses' ? dropdownRef : null}>
                     <motion.button
                       className={`flex items-center space-x-1.5 px-4 py-2.5 rounded-lg font-medium transition-all duration-200 ${isActive(item.path)
                         ? 'text-[#8c52ff] bg-[#8c52ff]/5'
@@ -302,7 +317,7 @@ const Header = () => {
                 exit="exit"
               >
                 <div className="flex-1 overflow-y-auto px-6 py-8 space-y-2.5">
-                  {navItems.map((item, index) => (
+                  {navItems.map((item) => (
                     <div key={item.name} className="py-1.5">
                       {item.dropdown ? (
                         <div>
