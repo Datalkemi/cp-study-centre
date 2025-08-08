@@ -45,18 +45,11 @@ const Header = () => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setActiveDropdown(null);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [activeDropdown]);
+  const handleDropdownBlur = (event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setActiveDropdown(null);
+    }
+  };
 
   const navItems = [
     { name: 'Home', path: '/', icon: null },
@@ -203,7 +196,11 @@ const Header = () => {
             {navItems.map((item, index) => (
               <div key={item.name} className="relative group">
                 {item.dropdown ? (
-                  <div ref={item.name === 'Courses' ? dropdownRef : null}>
+                  <div
+                    ref={item.name === 'Courses' ? dropdownRef : null}
+                    tabIndex={0}
+                    onBlur={handleDropdownBlur}
+                  >
                     <motion.button
                       className={`flex items-center space-x-1.5 px-4 py-2.5 rounded-lg font-medium transition-all duration-200 ${isActive(item.path)
                         ? 'text-[#8c52ff] bg-[#8c52ff]/5'
