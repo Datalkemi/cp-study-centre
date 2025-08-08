@@ -312,7 +312,7 @@ const Home = () => {
           <div className="absolute inset-0 bg-white/10"></div> {/* overlay */}
         </div>
 
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
           <div className="flex flex-col lg:flex-row items-center">
             {/* Hero Content */}
@@ -516,7 +516,7 @@ const Home = () => {
 
       {/* Services Section */}
       < section ref={targetRef} className="py-20 bg-neutral-50" >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             style={{ opacity, y, scale }}
             className="text-center max-w-4xl mx-auto mb-16"
@@ -586,7 +586,7 @@ const Home = () => {
 
       {/* Stats Section */}
       < section className="py-16 bg-[#8c52ff] text-white" >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <motion.div
@@ -612,7 +612,7 @@ const Home = () => {
 
       {/* Testimonials Section */}
       < section className="py-20 bg-gradient-to-b from-neutral-50 to-white" >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto mb-16">
             <h2 className="text-neutral-700 text-shadow-md text-3xl md:text-5xl font-bold mb-4">
               What Our Students Say
@@ -671,7 +671,7 @@ const Home = () => {
 
       {/* CTA Section */}
       < section className="py-20 text-white bg-neutral-400 " >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center text-center lg:flex-row lg:items-start lg:text-left lg:justify-between gap-6 w-full">
             <div className="w-full lg:w-3/4">
               <motion.h2
