@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useLocation,
-} from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+} from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Components
-import Header from './components/Header';
-import Footer from './components/Footer';
-import WhatsAppFloat from './components/WhatsAppFloat';
-import DailyLearningPopup from './components/DailyLearningPopup';
-import NewsletterPopup from './components/NewsletterPopup';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import WhatsAppFloat from "./components/WhatsAppFloat";
+import DailyLearningPopup from "./components/DailyLearningPopup";
+import NewsletterPopup from "./components/NewsletterPopup";
 
 // Pages
-import Home from './pages/Home';
-import Courses from './pages/Courses';
-import SchoolTuition from './pages/SchoolTuition';
-import LanguagePrep from './pages/LanguagePrep';
-import SkillCourses from './pages/SkillCourses';
-import Webinars from './pages/Webinars';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import DailyLearning from './pages/DailyLearning';
+import Home from "./pages/Home";
+import Courses from "./pages/Courses";
+import SchoolTuition from "./pages/SchoolTuition";
+import LanguagePrep from "./pages/LanguagePrep";
+import SkillCourses from "./pages/SkillCourses";
+import Webinars from "./pages/Webinars";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import DailyLearning from "./pages/DailyLearning";
 
 // Animated page transitions
 const PageTransition = ({ children }) => {
@@ -47,60 +47,85 @@ const PageTransition = ({ children }) => {
 function App() {
   const [showDailyLearning, setShowDailyLearning] = useState(false);
   const [showNewsletter, setShowNewsletter] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
+
+  // NEW: store a queued newsletter trigger if Daily Learning hasn’t been dismissed yet
+  const [queuedNewsletter, setQueuedNewsletter] = useState(false);
+
+  // NEW: central close handlers that also persist dismissal
+  const closeDailyLearning = () => {
+    setShowDailyLearning(false);
+    localStorage.setItem("dismissedDailyLearning", "true");
+
+    // If newsletter was queued, show it now (unless already dismissed)
+    if (
+      queuedNewsletter &&
+      localStorage.getItem("dismissedNewsletter") !== "true"
+    ) {
+      setShowNewsletter(true);
+      setQueuedNewsletter(false);
+    }
+  };
+
+  const closeNewsletter = () => {
+    setShowNewsletter(false);
+    localStorage.setItem("dismissedNewsletter", "true");
+  };
 
   useEffect(() => {
-    // Show daily learning popup after 3 seconds
-    const dailyTimer = setTimeout(() => {
-      if (!hasInteracted) {
-        setShowDailyLearning(true);
-      }
-    }, 3000);
+    const dismissedDL =
+      localStorage.getItem("dismissedDailyLearning") === "true";
+    const dismissedNL = localStorage.getItem("dismissedNewsletter") === "true";
 
-    // Track scroll for newsletter popup
-    let hasScrolled70 = false;
+    let dailyTimer;
     let idleTimer;
 
-    const handleScroll = () => {
-      setHasInteracted(true);
+    // Show Daily Learning once, 5s after load if not dismissed
+    if (!dismissedDL) {
+      dailyTimer = setTimeout(() => setShowDailyLearning(true), 5000);
+    }
 
-      const scrollPercent =
+    // Newsletter triggers: on scroll > 70% or idle 15s
+    const maybeTriggerNewsletter = () => {
+      if (dismissedNL) return;
+
+      const dailyDismissed =
+        localStorage.getItem("dismissedDailyLearning") === "true";
+
+      if (dailyDismissed) {
+        setShowNewsletter(true);
+      } else {
+        // Daily isn’t closed yet — queue it to show after Daily closes
+        setQueuedNewsletter(true);
+      }
+    };
+
+    const handleScroll = () => {
+      const percent =
         (window.scrollY /
           (document.documentElement.scrollHeight - window.innerHeight)) *
         100;
-      if (scrollPercent > 70 && !hasScrolled70) {
-        hasScrolled70 = true;
-        setShowNewsletter(true);
+
+      if (percent > 70) {
+        maybeTriggerNewsletter();
+        window.removeEventListener("scroll", handleScroll); // fire once
       }
     };
 
-    const handleMouseMove = () => {
-      setHasInteracted(true);
-      clearTimeout(idleTimer);
+    window.addEventListener("scroll", handleScroll);
+
+    // Idle 15s fallback
+    if (!dismissedNL) {
       idleTimer = setTimeout(() => {
-        if (!hasScrolled70 && !showDailyLearning) {
-          setShowNewsletter(true);
-        }
-      }, 8000);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('mousemove', handleMouseMove);
-
-    // Start idle timer
-    idleTimer = setTimeout(() => {
-      if (!hasScrolled70 && !hasInteracted) {
-        setShowNewsletter(true);
-      }
-    }, 15000);
+        maybeTriggerNewsletter();
+      }, 15000);
+    }
 
     return () => {
       clearTimeout(dailyTimer);
       clearTimeout(idleTimer);
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [hasInteracted, showDailyLearning]);
+  }, []);
 
   return (
     <Router>
@@ -190,11 +215,11 @@ function App() {
         {/* Popups */}
         <DailyLearningPopup
           isOpen={showDailyLearning}
-          onClose={() => setShowDailyLearning(false)}
+          onClose={closeDailyLearning} // changed
         />
         <NewsletterPopup
           isOpen={showNewsletter}
-          onClose={() => setShowNewsletter(false)}
+          onClose={closeNewsletter} // changed
         />
       </div>
     </Router>
