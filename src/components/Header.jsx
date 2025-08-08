@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
   X,
@@ -12,9 +12,9 @@ import {
   Calendar,
   Phone,
   Sparkles,
-} from 'lucide-react';
+} from "lucide-react";
 
-import Logo from '/assets/logo.png';
+import Logo from "/assets/logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,8 +28,8 @@ const Header = () => {
       setIsScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const toggleMenu = () => {
@@ -52,32 +52,32 @@ const Header = () => {
   };
 
   const navItems = [
-    { name: 'Home', path: '/', icon: null },
+    { name: "Home", path: "/", icon: null },
     {
-      name: 'Courses',
-      path: '/courses',
+      name: "Courses",
+      path: "/courses",
       icon: BookOpen,
       dropdown: [
         {
-          name: 'School Tuition',
-          path: '/school-tuition',
-          description: 'CBSE, ICSE, State Boards',
+          name: "School Tuition",
+          path: "/school-tuition",
+          description: "CBSE, ICSE, State Boards",
         },
         {
-          name: 'Language Prep',
-          path: '/language-prep',
-          description: 'IELTS, PTE, OET, German',
+          name: "Language Prep",
+          path: "/language-prep",
+          description: "IELTS, PTE, OET, German",
         },
         {
-          name: 'Skill Courses',
-          path: '/skill-courses',
-          description: 'Coming Soon',
+          name: "Skill Courses",
+          path: "/skill-courses",
+          description: "Coming Soon",
         },
       ],
     },
-    { name: 'Webinars', path: '/webinars', icon: Calendar },
-    { name: 'About', path: '/about', icon: Users },
-    { name: 'Contact', path: '/contact', icon: Phone },
+    { name: "Events", path: "/webinars", icon: Calendar },
+    { name: "About", path: "/about", icon: Users },
+    { name: "Contact", path: "/contact", icon: Phone },
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -88,7 +88,7 @@ const Header = () => {
       scale: 1.05,
       transition: {
         duration: 0.3,
-        type: 'spring',
+        type: "spring",
         stiffness: 300,
       },
     },
@@ -102,11 +102,11 @@ const Header = () => {
       transition: {
         delay: i * 0.05,
         duration: 0.5,
-        ease: 'easeOut',
+        ease: "easeOut",
       },
     }),
     hover: {
-      color: '#8c52ff',
+      color: "#8c52ff",
       transition: {
         duration: 0.2,
       },
@@ -125,7 +125,7 @@ const Header = () => {
       scale: 1,
       transition: {
         duration: 0.25,
-        ease: 'easeOut',
+        ease: "easeOut",
         staggerChildren: 0.05,
       },
     },
@@ -146,10 +146,10 @@ const Header = () => {
     },
     visible: {
       opacity: 1,
-      height: 'auto',
+      height: "auto",
       transition: {
         duration: 0.3,
-        ease: 'easeInOut',
+        ease: "easeInOut",
         staggerChildren: 0.05,
       },
     },
@@ -158,17 +158,18 @@ const Header = () => {
       height: 0,
       transition: {
         duration: 0.25,
-        ease: 'easeInOut',
+        ease: "easeInOut",
       },
     },
   };
 
   return (
     <motion.header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
-        ? 'bg-white/85 backdrop-blur-md shadow-md border-b border-neutral-100'
-        : 'bg-white backdrop-blur-md shadow-md '
-        }`}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-white/85 backdrop-blur-md shadow-md border-b border-neutral-100"
+          : "bg-white backdrop-blur-md shadow-md "
+      }`}
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -188,7 +189,6 @@ const Header = () => {
             >
               <img src={Logo} alt="CP Study Center Logo" className="h-25" />
             </motion.div>
-
           </Link>
 
           {/* Desktop Navigation */}
@@ -197,15 +197,18 @@ const Header = () => {
               <div key={item.name} className="relative group">
                 {item.dropdown ? (
                   <div
-                    ref={item.name === 'Courses' ? dropdownRef : null}
+                    ref={item.name === "Courses" ? dropdownRef : null}
                     tabIndex={0}
                     onBlur={handleDropdownBlur}
+                    onMouseEnter={() => setActiveDropdown(item.name)}
+                    onMouseLeave={() => setActiveDropdown(null)} // close when pointer leaves
                   >
                     <motion.button
-                      className={`flex items-center space-x-1.5 px-4 py-2.5 rounded-lg font-medium transition-all duration-200 ${isActive(item.path)
-                        ? 'text-[#8c52ff] bg-[#8c52ff]/5'
-                        : 'text-neutral-700 hover:text-[#8c52ff] hover:bg-[#8c52ff]/5'
-                        }`}
+                      className={`flex items-center space-x-1.5 px-4 py-2.5 rounded-lg font-medium transition-all duration-200 ${
+                        isActive(item.path)
+                          ? "text-[#8c52ff] bg-[#8c52ff]/5"
+                          : "text-neutral-700 hover:text-[#8c52ff] hover:bg-[#8c52ff]/5"
+                      }`}
                       onClick={() => handleDropdownToggle(item.name)}
                       variants={menuItemVariants}
                       custom={index}
@@ -255,10 +258,11 @@ const Header = () => {
                 ) : (
                   <Link
                     to={item.path}
-                    className={`px-4 py-2.5 rounded-lg font-medium transition-all duration-200 ${isActive(item.path)
-                      ? 'text-[#8c52ff] bg-[#8c52ff]/5'
-                      : 'text-neutral-700 hover:text-[#8c52ff] hover:bg-[#8c52ff]/5'
-                      }`}
+                    className={`px-4 py-2.5 rounded-lg font-medium transition-all duration-200 ${
+                      isActive(item.path)
+                        ? "text-[#8c52ff] bg-[#8c52ff]/5"
+                        : "text-neutral-700 hover:text-[#8c52ff] hover:bg-[#8c52ff]/5"
+                    }`}
                   >
                     <motion.span
                       variants={menuItemVariants}
@@ -320,10 +324,11 @@ const Header = () => {
                         <div>
                           <button
                             onClick={() => handleDropdownToggle(item.name)}
-                            className={`w-full flex items-center justify-between py-3.5 px-5 rounded-xl ${isActive(item.path)
-                              ? 'bg-[#8c52ff]/5 text-[#8c52ff] shadow-sm'
-                              : 'hover:bg-neutral-50'
-                              }`}
+                            className={`w-full flex items-center justify-between py-3.5 px-5 rounded-xl ${
+                              isActive(item.path)
+                                ? "bg-[#8c52ff]/5 text-[#8c52ff] shadow-sm"
+                                : "hover:bg-neutral-50"
+                            }`}
                           >
                             <div className="flex items-center space-x-3.5">
                               {item.icon && <item.icon className="w-5 h-5" />}
@@ -342,7 +347,7 @@ const Header = () => {
                             {activeDropdown === item.name && (
                               <motion.div
                                 initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: 'auto', opacity: 1 }}
+                                animate={{ height: "auto", opacity: 1 }}
                                 exit={{ height: 0, opacity: 0 }}
                                 transition={{ duration: 0.3 }}
                                 className="overflow-hidden pl-5 ml-3 border-l-2 border-[#8c52ff]/20 mt-1 mb-1"
@@ -370,10 +375,11 @@ const Header = () => {
                         <Link
                           to={item.path}
                           onClick={closeMenu}
-                          className={`flex items-center space-x-3.5 py-3.5 px-5 rounded-xl ${isActive(item.path)
-                            ? 'bg-[#8c52ff]/5 text-[#8c52ff] shadow-sm'
-                            : 'hover:bg-neutral-50'
-                            }`}
+                          className={`flex items-center space-x-3.5 py-3.5 px-5 rounded-xl ${
+                            isActive(item.path)
+                              ? "bg-[#8c52ff]/5 text-[#8c52ff] shadow-sm"
+                              : "hover:bg-neutral-50"
+                          }`}
                         >
                           {item.icon && <item.icon className="w-5 h-5" />}
                           <span className="font-medium">{item.name}</span>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import {
   GraduationCap,
   Users,
@@ -11,108 +11,105 @@ import {
   Target,
   Phone,
   Mail,
-} from 'lucide-react';
+} from "lucide-react";
 
 const SchoolTuition = () => {
-  const [selectedBoard, setSelectedBoard] = useState('cbse');
+  const [selectedBoard, setSelectedBoard] = useState("cbse");
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    class: '',
-    board: '',
-    subjects: '',
-    mode: '',
+    name: "",
+    email: "",
+    phone: "",
+    class: "",
+    board: "",
+    subjects: "",
+    mode: "",
   });
 
   const boards = [
     {
-      id: 'cbse',
-      name: 'CBSE',
-      description: 'Central Board of Secondary Education',
+      id: "cbse",
+      name: "CBSE",
+      description: "Central Board of Secondary Education",
     },
     {
-      id: 'icse',
-      name: 'ICSE',
-      description: 'Indian Certificate of Secondary Education',
+      id: "icse",
+      name: "ICSE",
+      description: "Indian Certificate of Secondary Education",
     },
     {
-      id: 'state',
-      name: 'State Board',
-      description: 'Various State Education Boards',
+      id: "state",
+      name: "State Board",
+      description: "Various State Education Boards",
     },
   ];
 
   const modes = [
     {
-      title: 'Online Group Classes',
-      description: 'Interactive group sessions with 8-12 students',
+      title: "Online Group Classes",
+      description: "Interactive group sessions with 8-12 students",
       features: [
-        'Live Interactive Sessions',
-        'Recorded Classes',
-        'Group Discussions',
-        'Peer Learning',
+        "Live Interactive Sessions",
+        "Recorded Classes",
+        "Group Discussions",
+        "Peer Learning",
       ],
-      price: '₹12,000',
       popular: false,
     },
     {
-      title: 'One-on-One Online',
-      description: 'Personalized attention with dedicated tutor',
+      title: "One-on-One Online",
+      description: "Personalized attention with dedicated tutor",
       features: [
-        'Individual Focus',
-        'Customized Pace',
-        'Flexible Timings',
-        'Instant Doubt Clearing',
+        "Individual Focus",
+        "Customized Pace",
+        "Flexible Timings",
+        "Instant Doubt Clearing",
       ],
-      price: '₹25,000',
       popular: true,
     },
     {
-      title: 'Home Tuition',
-      description: 'Expert tutors visit your home for personalized teaching',
+      title: "Home Tuition",
+      description: "Expert tutors visit your home for personalized teaching",
       features: [
-        'At Your Doorstep',
-        'Comfortable Environment',
-        'Family Involvement',
-        'Flexible Schedule',
+        "At Your Doorstep",
+        "Comfortable Environment",
+        "Family Involvement",
+        "Flexible Schedule",
       ],
-      price: '₹30,000',
       popular: false,
     },
   ];
 
   const subjects = {
-    'classes-6-8': [
-      'Mathematics',
-      'Science',
-      'English',
-      'Social Studies',
-      'Hindi',
+    "classes-6-8": [
+      "Mathematics",
+      "Science",
+      "English",
+      "Social Studies",
+      "Hindi",
     ],
-    'classes-9-10': [
-      'Mathematics',
-      'Science',
-      'English',
-      'Social Studies',
-      'Hindi',
-      'Computer Science',
+    "classes-9-10": [
+      "Mathematics",
+      "Science",
+      "English",
+      "Social Studies",
+      "Hindi",
+      "Computer Science",
     ],
-    'classes-11-12': [
-      'Mathematics',
-      'Physics',
-      'Chemistry',
-      'Biology',
-      'English',
-      'Computer Science',
-      'Economics',
-      'Accountancy',
+    "classes-11-12": [
+      "Mathematics",
+      "Physics",
+      "Chemistry",
+      "Biology",
+      "English",
+      "Computer Science",
+      "Economics",
+      "Accountancy",
     ],
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    console.log("Form submitted:", formData);
     // Handle form submission
   };
 
@@ -177,8 +174,8 @@ const SchoolTuition = () => {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className={`bg-white rounded-2xl shadow-lg p-8 text-center cursor-pointer transition-all duration-300 ${
                   selectedBoard === board.id
-                    ? 'ring-2 ring-purple-600 shadow-xl'
-                    : 'hover:shadow-xl'
+                    ? "ring-2 ring-purple-600 shadow-xl"
+                    : "hover:shadow-xl"
                 }`}
                 onClick={() => setSelectedBoard(board.id)}
               >
@@ -221,7 +218,7 @@ const SchoolTuition = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className={`bg-white rounded-2xl shadow-lg overflow-hidden ${
-                  mode.popular ? 'ring-2 ring-orange-500' : ''
+                  mode.popular ? "ring-2 ring-orange-500" : ""
                 }`}
               >
                 {mode.popular && (
@@ -235,12 +232,12 @@ const SchoolTuition = () => {
                   </h3>
                   <p className="text-gray-600 mb-4">{mode.description}</p>
 
-                  <div className="text-3xl font-bold text-purple-600 mb-6">
+                  {/* <div className="text-3xl font-bold text-purple-600 mb-6">
                     {mode.price}
                     <span className="text-sm text-gray-500 font-normal">
                       /month
                     </span>
-                  </div>
+                  </div> */}
 
                   <ul className="space-y-3 mb-8">
                     {mode.features.map((feature, idx) => (
@@ -256,8 +253,8 @@ const SchoolTuition = () => {
                     whileTap={{ scale: 0.98 }}
                     className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${
                       mode.popular
-                        ? 'bg-orange-500 text-white hover:bg-orange-600'
-                        : 'bg-purple-600 text-white hover:bg-purple-700'
+                        ? "bg-orange-500 text-white hover:bg-orange-600"
+                        : "bg-purple-600 text-white hover:bg-purple-700"
                     }`}
                   >
                     Choose This Mode
