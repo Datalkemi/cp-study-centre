@@ -172,11 +172,10 @@ const SchoolTuition = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className={`bg-white rounded-2xl shadow-lg p-8 text-center cursor-pointer transition-all duration-300 ${
-                  selectedBoard === board.id
-                    ? "ring-2 ring-purple-600 shadow-xl"
-                    : "hover:shadow-xl"
-                }`}
+                className={`bg-white rounded-2xl shadow-lg p-8 text-center cursor-pointer transition-all duration-300 ${selectedBoard === board.id
+                  ? "ring-2 ring-purple-600 shadow-xl"
+                  : "hover:shadow-xl"
+                  }`}
                 onClick={() => setSelectedBoard(board.id)}
               >
                 <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -217,9 +216,8 @@ const SchoolTuition = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className={`bg-white rounded-2xl shadow-lg overflow-hidden ${
-                  mode.popular ? "ring-2 ring-orange-500" : ""
-                }`}
+                className={`bg-white rounded-2xl shadow-lg overflow-hidden ${mode.popular ? "ring-2 ring-orange-500" : ""
+                  }`}
               >
                 {mode.popular && (
                   <div className="bg-orange-500 text-white text-center py-2 text-sm font-medium">
@@ -251,11 +249,10 @@ const SchoolTuition = () => {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${
-                      mode.popular
-                        ? "bg-orange-500 text-white hover:bg-orange-600"
-                        : "bg-purple-600 text-white hover:bg-purple-700"
-                    }`}
+                    className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${mode.popular
+                      ? "bg-orange-500 text-white hover:bg-orange-600"
+                      : "bg-purple-600 text-white hover:bg-purple-700"
+                      }`}
                   >
                     Choose This Mode
                   </motion.button>
@@ -420,12 +417,12 @@ const SchoolTuition = () => {
               <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8">
                 <div className="flex items-center space-x-2">
                   <Phone className="w-5 h-5 text-purple-600" />
-                  <span className="text-gray-700">+91 98765 43210</span>
+                  <span className="text-gray-700">+91 80757 57437</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Mail className="w-5 h-5 text-purple-600" />
                   <span className="text-gray-700">
-                    tuition@cpstudycenter.com
+                    cp.edu.in@gmail.com
                   </span>
                 </div>
               </div>

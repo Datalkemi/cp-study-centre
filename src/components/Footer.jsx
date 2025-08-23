@@ -44,15 +44,15 @@ const Footer = () => {
   ];
 
   const contactInfo = [
-    { icon: Phone, text: '+91 9876543210', href: 'tel:+919876543210' },
+    { icon: Phone, text: '+91 80757 57437', href: 'tel:+91 80757 57437' },
     {
       icon: Mail,
-      text: 'info@cpstudycenter.com',
-      href: 'mailto:info@cpstudycenter.com',
+      text: 'cp.edu.in@gmail.com',
+      href: 'mailto:cp.edu.in@gmail.com',
     },
     {
       icon: MapPin,
-      text: 'CP Study Center, Main Street, City',
+      text: 'Cp Study Center, Ponkunnam, Kottayam',
       href: 'https://maps.google.com',
     },
     {
@@ -67,25 +67,25 @@ const Footer = () => {
     {
       name: 'Facebook',
       icon: Facebook,
-      href: '#',
+      href: 'https://www.facebook.com/profile.php?id=61571879843221&mibextid=wwXIfr&rdid=Xi8wWMSOZLI7NMxw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1BM8u9JbGZ%2F%3Fmibextid%3DwwXIfr',
       color: 'bg-blue-600 hover:bg-blue-700',
     },
     {
       name: 'Instagram',
       icon: Instagram,
-      href: '#',
+      href: 'https://www.instagram.com/cpstudycenter/',
       color: 'bg-pink-600 hover:bg-pink-700',
     },
     {
       name: 'LinkedIn',
       icon: Linkedin,
-      href: '#',
+      href: 'https://www.linkedin.com/company/cp-study-center',
       color: 'bg-blue-700 hover:bg-blue-800',
     },
     {
       name: 'YouTube',
       icon: Youtube,
-      href: '#',
+      href: 'https://www.youtube.com/@CP-StudyCenter/',
       color: 'bg-red-600 hover:bg-red-700',
     },
   ];

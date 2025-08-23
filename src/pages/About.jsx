@@ -15,6 +15,21 @@ import {
   ChevronRight,
 } from "lucide-react";
 
+const getInitials = (name) => {
+  return name
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase();
+};
+
+const avatarColors = ['bg-red-400', 'bg-green-400', 'bg-blue-400', 'bg-yellow-400', 'bg-purple-400'];
+
+const getColor = (index) => {
+  return avatarColors[index % avatarColors.length];
+};
+
+
 const About = () => {
   const [openSection, setOpenSection] = useState("Mission");
 
@@ -39,12 +54,12 @@ const About = () => {
         },
         {
           title: "Joyful Learning Culture",
-          text: "Education that’s engaging, light, and enjoyable.",
+          text: "Education that's engaging, light, and enjoyable.",
           icon: Smile,
         },
         {
           title: "Empowered Student Journeys",
-          text: "We inspire every learner’s unique growth path.",
+          text: "We inspire every learner's unique growth path.",
           icon: UserCheck,
         },
         {
@@ -79,57 +94,30 @@ const About = () => {
   const testimonials = [
     {
       quote:
-        "CP Study Center helped me jump from a C to an A. The mentoring was practical and motivating.",
-      name: "Samira Khan",
-      role: "Year 12 · Methods",
-      avatar:
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&h=200&fit=crop",
-      rating: 5,
-    },
-    {
-      quote:
-        "Personalized study plan + weekly check-ins = consistency I never had before.",
-      name: "Vikram Singh",
-      role: "Undergrad · Data Structures",
-      avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&h=200&fit=crop",
-      rating: 5,
-    },
-    {
-      quote:
-        "Tutors explain complex ideas in simple steps. I actually enjoy revision now.",
-      name: "Fatima Zahra",
+        "Myself Nancy, I am here to share my experience regarding the IELTS class that I  have decided to enroll in the  class  after seeing their great reviews  from online about CP study center. My tutor, Akshay Sir , was incredibly helpful...",
+      name: "Nancy",
       role: "IELTS Prep",
       avatar:
-        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=200&h=200&fit=crop",
-      rating: 4,
-    },
-    {
-      quote:
-        "The mock tests and feedback loop were game-changers for my confidence.",
-      name: "Daniel Lee",
-      role: "Year 11 · Chemistry",
-      avatar:
-        "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=200&h=200&fit=crop",
+        '#',
       rating: 5,
     },
     {
       quote:
-        "Loved the hybrid model. Flexible, responsive, and super supportive faculty.",
-      name: "Aisha Mohammed",
-      role: "Foundation · Academic English",
+        "Thank you Akshay sir for your class. I learned so much from this course, the instructor was engaging and knowledgeable, and i feel much more confidence in my abilities.",
+      name: "Sahil",
+      role: "IELTS Prep",
       avatar:
-        "https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=200&h=200&fit=crop",
+        "#",
       rating: 5,
     },
     {
       quote:
-        "Clear roadmaps and bite-sized lessons kept me on track before finals.",
-      name: "Noah Carter",
-      role: "Undergrad · Calculus",
+        "The best thing of this institute are the experienced faculties, who always try to motivate students,they take care of all the students and  they take extra care about the students  those basic is not good.",
+      name: "Geethu",
+      role: "Student",
       avatar:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&h=200&fit=crop",
-      rating: 4,
+        "#",
+      rating: 5,
     },
   ];
 
@@ -188,9 +176,8 @@ const About = () => {
                   {sec.key}
                 </span>
                 <ChevronDown
-                  className={`w-5 h-5 text-gray-600 transform transition-transform duration-300 ${
-                    openSection === sec.key ? "rotate-180" : ""
-                  }`}
+                  className={`w-5 h-5 text-gray-600 transform transition-transform duration-300 ${openSection === sec.key ? "rotate-180" : ""
+                    }`}
                 />
               </button>
 
@@ -310,10 +297,9 @@ const About = () => {
             <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white to-transparent" />
             <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white to-transparent" />
 
-            {/* Scroller */}
             <div
               ref={scrollerRef}
-              className="flex overflow-x-auto gap-6 pr-2 pl-2 snap-x snap-mandatory custom-scrollbar"
+              className="flex overflow-x-auto gap-6 snap-x snap-mandatory custom-scrollbar -mx-6 px-6 scroll-px-6 pb-1"
             >
               {testimonials.map((t, i) => (
                 <article
@@ -321,18 +307,46 @@ const About = () => {
                   data-card
                   className="flex-none w-80 snap-center bg-gray-50 rounded-2xl shadow-md p-6 border border-gray-100"
                 >
-                  <MessageSquare className="w-6 h-6 text-purple-600 mb-3" />
-                  <p className="text-gray-700 mb-4 italic leading-relaxed">
-                    “{t.quote}”
-                  </p>
+                  {/* <MessageSquare className="w-6 h-6 text-purple-600 mb-3" /> */}
+
+                  {/* <div className="flex items-center gap-3">
+                    <div>
+                      <div className="w-12 h-12 rounded-full bg-neutral-200 overflow-hidden">
+                        <div className={`w-full h-full flex items-center justify-center text-white font-semibold ${getColor(i)}`}>
+                          {getInitials(t.name)}
+                        </div>
+                      </div>
+                      <div className="font-semibold text-gray-900 leading-tight">
+                        {t.name}
+                      </div>
+                      <div className="text-sm text-gray-500">{t.role}</div>
+                    </div>
+                  </div> */}
+
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-full bg-neutral-200 overflow-hidden">
+                      <div className={`w-full h-full flex items-center justify-center text-white font-semibold ${getColor(i)}`}>
+                        {getInitials(t.name)}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-neutral-800">
+                        {t.name}
+                      </h4>
+                      <p className="text-sm text-neutral-500">
+                        {t.role}
+                      </p>
+                    </div>
+
+                    <MessageSquare className="w-6 h-6 text-purple-600 mb-3 ml-auto" />
+                  </div>
 
                   <div className="flex items-center mb-3">
                     {Array.from({ length: 5 }).map((_, idx) => (
                       <Star
                         key={idx}
-                        className={`w-4 h-4 mr-1 ${
-                          idx < t.rating ? "text-yellow-500" : "text-gray-300"
-                        }`}
+                        className={`w-4 h-4 mr-1 ${idx < t.rating ? "text-yellow-500" : "text-gray-300"
+                          }`}
                         style={{
                           fill: idx < t.rating ? "currentColor" : "none",
                         }}
@@ -340,19 +354,9 @@ const About = () => {
                     ))}
                   </div>
 
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={t.avatar}
-                      alt={t.name}
-                      className="w-10 h-10 rounded-full object-cover"
-                    />
-                    <div>
-                      <div className="font-semibold text-gray-900 leading-tight">
-                        {t.name}
-                      </div>
-                      <div className="text-sm text-gray-500">{t.role}</div>
-                    </div>
-                  </div>
+                  <p className="text-gray-700 mb-4 italic leading-relaxed">
+                    “{t.quote}”
+                  </p>
                 </article>
               ))}
             </div>

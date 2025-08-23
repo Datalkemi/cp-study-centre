@@ -105,24 +105,24 @@ const Contact = () => {
           <div className="mt-12 space-y-4 text-gray-600">
             <div className="flex items-center space-x-2">
               <MapPin className="w-5 h-5 text-primary" />
-              <span>123 CP Street, Learning City</span>
+              <span>Cp Study Center, Ponkunnam, Kottayam</span>
             </div>
             <div className="flex items-center space-x-2">
               <Phone className="w-5 h-5 text-primary" />
               <a
-                href="tel:+911234567890"
+                href="tel:+91 80757 57437"
                 className="hover:text-primary transition"
               >
-                +91 12345 67890
+                +91 80757 57437
               </a>
             </div>
             <div className="flex items-center space-x-2">
               <Mail className="w-5 h-5 text-primary" />
               <a
-                href="mailto:info@cpstudycenter.com"
+                href="mailto:cp.edu.in@gmail.com"
                 className="hover:text-primary transition"
               >
-                info@cpstudycenter.com
+                cp.edu.in@gmail.com
               </a>
             </div>
           </div>

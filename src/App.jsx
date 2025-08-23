@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,6 +14,10 @@ import WhatsAppFloat from "./components/WhatsAppFloat";
 import DailyLearningPopup from "./components/DailyLearningPopup";
 import NewsletterPopup from "./components/NewsletterPopup";
 
+// NEW: Global Enquiry Modal
+import { EnquiryModalProvider } from "./context/EnquiryModalContext";
+import EnquiryModalRoot from "./components/EnquiryModalRoot";
+
 // Pages
 import Home from "./pages/Home";
 import Courses from "./pages/Courses";
@@ -28,15 +32,14 @@ import DailyLearning from "./pages/DailyLearning";
 // Animated page transitions
 const PageTransition = ({ children }) => {
   const location = useLocation();
-
   return (
     <AnimatePresence mode="wait">
       <motion.div
         key={location.pathname}
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
       >
         {children}
       </motion.div>
@@ -44,19 +47,30 @@ const PageTransition = ({ children }) => {
   );
 };
 
-function App() {
+// Scroll to top on every route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      const main = document.querySelector("main");
+      if (main && typeof main.scrollTo === "function") {
+        main.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      }
+    });
+  }, [pathname]);
+  return null;
+};
+
+function AppInner() {
   const [showDailyLearning, setShowDailyLearning] = useState(false);
   const [showNewsletter, setShowNewsletter] = useState(false);
-
-  // NEW: store a queued newsletter trigger if Daily Learning hasn’t been dismissed yet
   const [queuedNewsletter, setQueuedNewsletter] = useState(false);
 
-  // NEW: central close handlers that also persist dismissal
   const closeDailyLearning = () => {
     setShowDailyLearning(false);
     localStorage.setItem("dismissedDailyLearning", "true");
 
-    // If newsletter was queued, show it now (unless already dismissed)
     if (
       queuedNewsletter &&
       localStorage.getItem("dismissedNewsletter") !== "true"
@@ -79,12 +93,10 @@ function App() {
     let dailyTimer;
     let idleTimer;
 
-    // Show Daily Learning once, 5s after load if not dismissed
     if (!dismissedDL) {
       dailyTimer = setTimeout(() => setShowDailyLearning(true), 5000);
     }
 
-    // Newsletter triggers: on scroll > 70% or idle 15s
     const maybeTriggerNewsletter = () => {
       if (dismissedNL) return;
 
@@ -94,7 +106,6 @@ function App() {
       if (dailyDismissed) {
         setShowNewsletter(true);
       } else {
-        // Daily isn’t closed yet — queue it to show after Daily closes
         setQueuedNewsletter(true);
       }
     };
@@ -107,13 +118,12 @@ function App() {
 
       if (percent > 70) {
         maybeTriggerNewsletter();
-        window.removeEventListener("scroll", handleScroll); // fire once
+        window.removeEventListener("scroll", handleScroll);
       }
     };
 
     window.addEventListener("scroll", handleScroll);
 
-    // Idle 15s fallback
     if (!dismissedNL) {
       idleTimer = setTimeout(() => {
         maybeTriggerNewsletter();
@@ -128,102 +138,106 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div className="App min-h-screen bg-white flex flex-col">
-        <Header />
+    <div className="App min-h-screen bg-white flex flex-col">
+      <Header />
 
-        <main className="flex-grow pt-[76px]">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <PageTransition>
-                  <Home />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/courses"
-              element={
-                <PageTransition>
-                  <Courses />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/school-tuition"
-              element={
-                <PageTransition>
-                  <SchoolTuition />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/language-prep"
-              element={
-                <PageTransition>
-                  <LanguagePrep />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/skill-courses"
-              element={
-                <PageTransition>
-                  <SkillCourses />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/webinars"
-              element={
-                <PageTransition>
-                  <Webinars />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/about"
-              element={
-                <PageTransition>
-                  <About />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/contact"
-              element={
-                <PageTransition>
-                  <Contact />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/daily-learning"
-              element={
-                <PageTransition>
-                  <DailyLearning />
-                </PageTransition>
-              }
-            />
-          </Routes>
-        </main>
+      <main className="flex-grow pt-[76px]">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <PageTransition>
+                <Home />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/courses"
+            element={
+              <PageTransition>
+                <Courses />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/school-tuition"
+            element={
+              <PageTransition>
+                <SchoolTuition />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/language-prep"
+            element={
+              <PageTransition>
+                <LanguagePrep />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/skill-courses"
+            element={
+              <PageTransition>
+                <SkillCourses />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/webinars"
+            element={
+              <PageTransition>
+                <Webinars />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <PageTransition>
+                <About />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <PageTransition>
+                <Contact />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/daily-learning"
+            element={
+              <PageTransition>
+                <DailyLearning />
+              </PageTransition>
+            }
+          />
+        </Routes>
+      </main>
 
-        <Footer />
-        <WhatsAppFloat />
+      <Footer />
+      <WhatsAppFloat />
 
-        {/* Popups */}
-        <DailyLearningPopup
-          isOpen={showDailyLearning}
-          onClose={closeDailyLearning} // changed
-        />
-        <NewsletterPopup
-          isOpen={showNewsletter}
-          onClose={closeNewsletter} // changed
-        />
-      </div>
-    </Router>
+      {/* Existing popups */}
+      <DailyLearningPopup isOpen={showDailyLearning} onClose={closeDailyLearning} />
+      <NewsletterPopup isOpen={showNewsletter} onClose={closeNewsletter} />
+
+      {/* NEW: Global Enquiry Modal mounted once */}
+      <EnquiryModalRoot />
+    </div>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <Router>
+      <EnquiryModalProvider>
+        <ScrollToTop />
+        <AppInner />
+      </EnquiryModalProvider>
+    </Router>
+  );
+}
