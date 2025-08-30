@@ -166,7 +166,7 @@ const DEMO_EVENTS = [
     icon: Sparkles,
     start: "2025-09-10",
     end: "2025-09-10",
-    time: "7:00 PM – 8:30 PM",
+    time: "7:00 PM - 8:30 PM",
     location: "Live Zoom Webinar",
     description: [
       "Task 1 & Task 2 structures that examiners love.",
@@ -176,12 +176,12 @@ const DEMO_EVENTS = [
   },
   {
     id: "parents-orientation-2025-09-14",
-    title: "Parents’ Orientation: Grade 8–10",
+    title: "Parents' Orientation: Grade 8-10",
     category: "program",
     icon: Users,
     start: "2025-09-14",
     end: "2025-09-14",
-    time: "10:30 AM – 12:00 PM",
+    time: "10:30 AM - 12:00 PM",
     location: "CP Study Center, Trivandrum",
     description: [
       "Meet our subject mentors.",
@@ -201,20 +201,21 @@ function EventCard({ event, onOpen }) {
       initial="hidden"
       animate="visible"
       whileHover="hover"
-      className="group bg-white rounded-2xl border border-neutral-200 shadow-sm overflow-hidden
-                 aspect-square grid grid-rows-[auto,1fr,auto]"
+      className={
+        // ⬇️ was: "aspect-[4/3] md:aspect-square ..."
+        "group bg-white rounded-2xl border border-neutral-200 shadow-sm overflow-hidden " +
+        "aspect-auto md:aspect-square grid grid-rows-[auto,1fr,auto]"
+      }
     >
       {/* Header */}
-      <div className="relative p-5 text-white">
+      <div className="relative p-4 sm:p-5 text-white">
         <div className="absolute inset-0 bg-[#8c52ff]/90" />
         <div className="absolute inset-0 bg-black/10" />
-
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-2">
             <span className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
               <CardIcon className="w-6 h-6" />
             </span>
-
             {event.highlight && (
               <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-600 to-rose-600 px-2.5 py-1 text-[11px] font-extrabold text-white ring-2 ring-white/50 shadow-sm backdrop-blur">
                 <StarIcon className="w-3.5 h-3.5" />
@@ -223,6 +224,7 @@ function EventCard({ event, onOpen }) {
             )}
           </div>
 
+          {/* keep the title to 2 lines so the header can't grow endlessly */}
           <h3 className="text-xl text-white font-bold leading-6 drop-shadow line-clamp-2">
             {event.title}
           </h3>
@@ -232,9 +234,7 @@ function EventCard({ event, onOpen }) {
             <span className="inline-flex items-center gap-1">
               <CalendarIcon className="w-4 h-4" />
               {fmt.format(toDate(event.start))}
-              {event.end && event.end !== event.start
-                ? ` – ${fmt.format(toDate(event.end))}`
-                : ""}
+              {event.end && event.end !== event.start ? ` – ${fmt.format(toDate(event.end))}` : ""}
             </span>
             {event.time && (
               <span className="inline-flex items-center gap-1">
@@ -246,17 +246,17 @@ function EventCard({ event, onOpen }) {
         </div>
       </div>
 
-      {/* Body (minimal: location only) */}
+      {/* Body */}
       <div className="p-5 bg-white">
         {event.location && (
           <div className="text-sm text-neutral-700 flex items-center gap-2">
             <MapPin className="w-4 h-4 text-neutral-500" />
-            <span className="truncate">{event.location}</span>
+            <span className="break-words">{event.location}</span>
           </div>
         )}
       </div>
 
-      {/* CTA */}
+      {/* CTA — always visible because height is auto on mobile */}
       <div className="p-5 pt-0">
         <button
           type="button"
@@ -272,6 +272,7 @@ function EventCard({ event, onOpen }) {
   );
 }
 
+
 /* ---------------- Modal (safe icon render) ---------------- */
 function EventModal({ open, onClose, event }) {
   return (
@@ -281,7 +282,12 @@ function EventModal({ open, onClose, event }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm flex items-center justify-center p-6"
+          // ⬇️ Put the overlay ABOVE the navbar and offset from the top on mobile
+          className="fixed inset-0 z-[80] bg-black/50 backdrop-blur-sm
+                     flex items-start justify-center
+                     pt-[max(env(safe-area-inset-top),theme(spacing.16))]  /* ~64px or notch */
+                     pb-4 px-3 mt-20 sm:mt-0
+                     sm:items-center sm:p-4"
           onClick={(e) => {
             e.preventDefault();
             onClose();
@@ -292,76 +298,79 @@ function EventModal({ open, onClose, event }) {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.96, opacity: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 24 }}
-            className="bg-white rounded-2xl w-full max-w-3xl overflow-hidden"
+            // ⬇️ Fit within viewport and allow internal scrolling
+            className="bg-white rounded-2xl w-full max-w-3xl overflow-hidden
+                       max-h-[calc(100svh-5rem)] sm:max-h-[calc(100vh-4rem)]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* ---------- HEADER ---------- */}
-            <div className="p-6 text-white relative">
-              {/* higher-contrast gradient for readability */}
-              <div className="absolute inset-0 bg-gradient-to-r from-violet-700 via-violet-600 to-orange-500" />
-              <div className="absolute inset-0 bg-black/15" />
+            <div className="p-4 sm:p-6 text-white relative">
+              {/* Make overlays ignore clicks */}
+              <div className="absolute inset-0 bg-gradient-to-r from-violet-700 via-violet-600 to-orange-500 pointer-events-none z-0" />
+              <div className="absolute inset-0 bg-black/15 pointer-events-none z-0" />
 
-              {/* icon + title */}
-              <div className="relative z-10 flex items-center gap-3">
+              {/* Close button — ensure it sits above overlays and is fully tappable */}
+              <button
+                type="button"
+                aria-label="Close"
+                onClick={onClose}
+                onMouseDown={(e) => e.stopPropagation()}  // extra safety to avoid backdrop handlers
+                className="absolute right-3 top-3 sm:right-4 sm:top-4
+               w-10 h-10 sm:w-9 sm:h-9 rounded-full
+               flex items-center justify-center
+               bg-white/20 hover:bg-white/30 text-white backdrop-blur
+               ring-1 ring-white/40
+               z-20 pointer-events-auto touch-manipulation cursor-pointer"
+              >
+                <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M6 6l12 12M18 6l-12 12" />
+                </svg>
+              </button>
+
+              <div className="relative z-10 flex items-center gap-3 mt-10 sm:mt-0">
                 {(() => {
-                  const IconH =
-                    event.kind === "single"
-                      ? (event.item?.icon || CalendarIcon)
-                      : CalendarIcon;
+                  const IconH = event.kind === "single" ? (event.item?.icon || CalendarIcon) : CalendarIcon;
                   return (
-                    <span className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center">
-                      <IconH className="w-6 h-6" />
+                    <span className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white/20 flex items-center justify-center">
+                      <IconH className="w-5 h-5 sm:w-6 sm:h-6" />
                     </span>
                   );
                 })()}
-                <h3 className="text-2xl text-white font-bold drop-shadow">
+                <h3 className="text-xl sm:text-2xl text-white font-bold leading-snug drop-shadow">
                   {event.kind === "single" ? event.item.title : event.title}
                 </h3>
               </div>
 
-              {/* meta: one item per line */}
-              <div className="relative z-10 mt-3 flex flex-col items-start gap-2 text-white/95">
+              <div className="relative z-10 mt-2 sm:mt-3 flex flex-col items-start gap-1.5 sm:gap-2 text-white/95">
                 {event.kind === "single" ? (
                   <>
-                    <CategoryBadge
-                      category={event.item.category || "program"}
-                      onDark
-                    />
-
-                    <div className="inline-flex items-center gap-2">
+                    <CategoryBadge category={event.item.category || "program"} onDark size="sm" />
+                    <div className="inline-flex items-center gap-2 text-sm sm:text-base">
                       <CalendarIcon className="w-4 h-4" />
-                      <span className="whitespace-normal break-words">
+                      <span>
                         {fmt.format(toDate(event.item.start))}
-                        {event.item.end &&
-                          event.item.end !== event.item.start
+                        {event.item.end && event.item.end !== event.item.start
                           ? ` – ${fmt.format(toDate(event.item.end))}`
                           : ""}
                       </span>
                     </div>
-
                     {event.item.time && (
-                      <div className="inline-flex items-center gap-2">
+                      <div className="inline-flex items-center gap-2 text-sm sm:text-base">
                         <Clock className="w-4 h-4" />
-                        <span className="whitespace-normal break-words">
-                          {event.item.time}
-                        </span>
+                        <span>{event.item.time}</span>
                       </div>
                     )}
-
                     {event.item.location && (
-                      <div className="inline-flex items-center gap-2">
+                      <div className="inline-flex items-center gap-2 text-sm sm:text-base">
                         <MapPin className="w-4 h-4" />
-                        <span className="whitespace-normal break-words">
-                          {event.item.location}
-                        </span>
+                        <span>{event.item.location}</span>
                       </div>
                     )}
                   </>
                 ) : (
                   <>
-                    {/* Multi-day header meta */}
-                    <CategoryBadge category="Program" onDark />
-                    <div className="inline-flex items-center gap-2">
+                    <CategoryBadge category="Program" onDark size="sm" />
+                    <div className="inline-flex items-center gap-2 text-sm sm:text-base">
                       <CalendarIcon className="w-4 h-4" />
                       <span>{fmt.format(toDate(event.date))}</span>
                     </div>
@@ -370,35 +379,31 @@ function EventModal({ open, onClose, event }) {
               </div>
             </div>
 
-            {/* ---------- BODY ---------- */}
-            <div className="p-6 space-y-4">
+            {/* ---------- BODY (scrollable) ---------- */}
+            <div className="p-4 sm:p-6 space-y-3 sm:space-y-4 overflow-y-auto">
               {event.kind === "single" ? (
                 <>
                   {event.item.description?.length ? (
-                    <ul className="space-y-2">
+                    <ul className="space-y-1.5 sm:space-y-2">
                       {event.item.description.map((line, i) => (
-                        <li
-                          key={i}
-                          className="text-neutral-800 flex items-start gap-2"
-                        >
-                          <Tag className="w-4 h-4 text-violet-600 mt-1 shrink-0" />
+                        <li key={i} className="text-sm sm:text-base text-neutral-800 flex items-start gap-2">
+                          <Tag className="w-4 h-4 text-violet-600 mt-0.5 shrink-0" />
                           <span>{line}</span>
                         </li>
                       ))}
                     </ul>
                   ) : (
-                    <p className="text-neutral-800">
-                      More details coming soon.
-                    </p>
+                    <p className="text-sm sm:text-base text-neutral-800">More details coming soon.</p>
                   )}
 
                   {event.item.cta?.href && (
-                    <div className="pt-2">
+                    <div className="pt-1.5 sm:pt-2">
                       <a
                         href={event.item.cta.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-violet-600 text-white font-medium hover:bg-violet-700 transition-colors"
+                        className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl
+                                   bg-violet-600 text-white text-sm sm:text-base font-medium hover:bg-violet-700"
                       >
                         {event.item.cta.label}
                         <ArrowRight className="w-4 h-4" />
@@ -407,55 +412,40 @@ function EventModal({ open, onClose, event }) {
                   )}
                 </>
               ) : (
-                // MULTI: show FULL details for every event on that date
-                <div className="space-y-5">
+                <div className="space-y-4 sm:space-y-5">
                   {event.items.map((ev) => (
-                    <div
-                      key={ev.id}
-                      className="rounded-xl border border-neutral-200 p-4"
-                    >
-                      <div className="flex items-start justify-between gap-4">
-                        <div>
-                          <h4 className="text-lg font-semibold text-neutral-900">
-                            {ev.title}
-                          </h4>
-                          <div className="mt-2 flex flex-col gap-1 text-sm text-neutral-700">
-                            <div className="inline-flex items-center gap-2">
-                              <CategoryBadge category={ev.category} size="sm" />
-                            </div>
-                            <div className="inline-flex items-center gap-2">
-                              <CalendarIcon className="w-4 h-4 text-neutral-500" />
-                              <span>
-                                {fmt.format(toDate(ev.start))}
-                                {ev.end && ev.end !== ev.start
-                                  ? ` – ${fmt.format(toDate(ev.end))}`
-                                  : ""}
-                              </span>
-                            </div>
-                            {ev.time && (
-                              <div className="inline-flex items-center gap-2">
-                                <Clock className="w-4 h-4 text-neutral-500" />
-                                <span>{ev.time}</span>
-                              </div>
-                            )}
-                            {ev.location && (
-                              <div className="inline-flex items-center gap-2">
-                                <MapPin className="w-4 h-4 text-neutral-500" />
-                                <span>{ev.location}</span>
-                              </div>
-                            )}
-                          </div>
+                    <div key={ev.id} className="rounded-xl border border-neutral-200 p-3 sm:p-4">
+                      <h4 className="text-base sm:text-lg font-semibold text-neutral-900">{ev.title}</h4>
+                      <div className="mt-1.5 sm:mt-2 flex flex-col gap-1 text-xs sm:text-sm text-neutral-700">
+                        <div className="inline-flex items-center gap-2">
+                          <CategoryBadge category={ev.category} size="sm" />
                         </div>
+                        <div className="inline-flex items-center gap-2">
+                          <CalendarIcon className="w-4 h-4 text-neutral-500" />
+                          <span>
+                            {fmt.format(toDate(ev.start))}
+                            {ev.end && ev.end !== ev.start ? ` – ${fmt.format(toDate(ev.end))}` : ""}
+                          </span>
+                        </div>
+                        {ev.time && (
+                          <div className="inline-flex items-center gap-2">
+                            <Clock className="w-4 h-4 text-neutral-500" />
+                            <span>{ev.time}</span>
+                          </div>
+                        )}
+                        {ev.location && (
+                          <div className="inline-flex items-center gap-2">
+                            <MapPin className="w-4 h-4 text-neutral-500" />
+                            <span>{ev.location}</span>
+                          </div>
+                        )}
                       </div>
 
                       {ev.description?.length ? (
-                        <ul className="mt-3 space-y-1">
+                        <ul className="mt-2 space-y-1">
                           {ev.description.map((line, i) => (
-                            <li
-                              key={i}
-                              className="text-neutral-800 flex items-start gap-2"
-                            >
-                              <Tag className="w-4 h-4 text-violet-600 mt-1 shrink-0" />
+                            <li key={i} className="text-sm text-neutral-800 flex items-start gap-2">
+                              <Tag className="w-4 h-4 text-violet-600 mt-0.5 shrink-0" />
                               <span>{line}</span>
                             </li>
                           ))}
@@ -463,12 +453,13 @@ function EventModal({ open, onClose, event }) {
                       ) : null}
 
                       {ev.cta?.href && (
-                        <div className="pt-3">
+                        <div className="pt-2">
                           <a
                             href={ev.cta.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-violet-600 text-white text-sm font-medium hover:bg-violet-700"
+                            className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-violet-600
+                                       text-white text-xs sm:text-sm font-medium hover:bg-violet-700"
                           >
                             {ev.cta.label}
                             <ArrowRight className="w-4 h-4" />
@@ -486,6 +477,7 @@ function EventModal({ open, onClose, event }) {
     </AnimatePresence>
   );
 }
+
 
 
 /* ---------------- Calendar (right aside) ---------------- */
@@ -587,6 +579,13 @@ export default function Webinars() {
   const [monthDate, setMonthDate] = useState(() => new Date());
   const [modalEvent, setModalEvent] = useState(null);
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const el = document.documentElement; // safer than body on iOS
+    if (open) el.classList.add("overflow-hidden");
+    else el.classList.remove("overflow-hidden");
+    return () => el.classList.remove("overflow-hidden");
+  }, [open]);
 
   // Prevent accidental navigation on empty anchors (defensive)
   useEffect(() => {

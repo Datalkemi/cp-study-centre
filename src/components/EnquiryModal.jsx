@@ -398,6 +398,7 @@ export default function EnquiryModal({
                                             <option value="pte">PTE</option>
                                             <option value="oet">OET</option>
                                             <option value="german">German</option>
+                                            <option value="spoken english">Spoken English</option>
                                         </select>
                                     </div>
                                 )}
