@@ -211,28 +211,28 @@ export default function LanguagePrep() {
   };
 
   return (
-    <div className="min-h-screen pt-16">
+    <div className="min-h-screen">
       {/* Hero */}
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        animate="visible"
-        className="text-center mt-16 mb-10"
-      >
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold inline-block relative text-neutral-900">
-          Language Test Preparation
-          <motion.span
-            className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-violet-600 to-orange-500"
-            initial={{ width: 0, opacity: 0 }}
-            animate={{ width: "100%", opacity: 1 }}
-            transition={{ delay: 0.25, duration: 0.55 }}
-          />
-        </h1>
-        <p className="text-lg text-neutral-600 max-w-3xl mx-auto mt-4">
-          Master IELTS, PTE, OET, and German with our expert coaching programs
 
-        </p>
-      </motion.div>
+      <section className="py-5">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center text-white 
+                       bg-[#8c52ff]
+                       rounded-2xl shadow-xl p-10"
+          >
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              Language Test Preparation
+            </h1>
+            <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">
+              Master IELTS, PTE, OET, and German with our expert coaching programs
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
 
       {/* Tabs header */}

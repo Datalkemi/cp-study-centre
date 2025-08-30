@@ -24,9 +24,9 @@ const navItems = [
     path: "/courses",
     icon: BookOpen,
     dropdown: [
-      { name: "School Tuition", path: "/school-tuition", description: "CBSE, ICSE, State Boards" },
-      { name: "Language Prep", path: "/language-prep", description: "IELTS, PTE, OET, German" },
-      { name: "Skill Courses", path: "/skill-courses", description: "Coming Soon" },
+      { name: "School Tuition", path: "/courses?tab=school-tuition", description: "CBSE, ICSE, State Boards" },
+      { name: "Language Prep", path: "/courses?tab=language-prep", description: "IELTS, PTE, OET, German" },
+      { name: "Skill Courses", path: "/courses?tab=skill-courses", description: "Coming Soon" },
     ],
   },
   { name: "Events", path: "/webinars", icon: Calendar },
