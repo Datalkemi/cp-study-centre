@@ -107,7 +107,7 @@ function MobileDrawer({ open, onClose, active, setActive }) {
       >
         {/* overlay (tap outside to close) */}
         <div
-          className="absolute inset-0 bg-black/40"
+          className="absolute inset-0 bg-black/40 backdrop-blur-sm"
           onClick={onClose}
           aria-hidden
         />
@@ -119,13 +119,13 @@ function MobileDrawer({ open, onClose, active, setActive }) {
           animate={{ x: 0 }}
           exit={{ x: "100%" }}
           transition={{ type: "spring", stiffness: 320, damping: 34 }}
-          className="absolute right-0 top-0 bottom-0 w-[80vw] max-w-[420px] bg-white shadow-2xl rounded-l-2xl overflow-hidden overscroll-contain focus:outline-none"
+          className="absolute right-0 top-14 bottom-0 w-[80vw] max-w-[420px] bg-white shadow-2xl rounded-l-2xl overflow-hidden overscroll-contain focus:outline-none"
           role="dialog"
           aria-modal="true"
           aria-labelledby="mobile-menu-title"
           onClick={(e) => e.stopPropagation()} // prevent overlay close when tapping inside
         >
-          <div className="h-full overflow-y-auto px-4 sm:px-6 py-6 space-y-2.5">
+          <div className="h-full overflow-y-auto px-5 sm:px-6 py-6 space-y-2.5">
             <h2 id="mobile-menu-title" className="sr-only">Mobile Navigation</h2>
 
             {navItems.map((item) => (
@@ -248,8 +248,8 @@ export default function Header() {
   return (
     <motion.header
       className={`fixed top-0 w-full z-[120] transition-all duration-300 ${isScrolled
-          ? "bg-white/85 backdrop-blur-md shadow-md border-b border-neutral-100"
-          : "bg-white shadow-md"
+        ? "bg-white/85 backdrop-blur-md shadow-md border-b border-neutral-100"
+        : "bg-white shadow-md"
         }`}
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -279,8 +279,8 @@ export default function Header() {
                       <Link
                         to={item.path}
                         className={`px-4 py-2.5 rounded-l-lg font-medium transition-all duration-200 ${isActive(item.path)
-                            ? "text-[#8c52ff] bg-[#8c52ff]/5"
-                            : "text-neutral-700 hover:text-[#8c52ff] hover:bg-[#8c52ff]/5"
+                          ? "text-[#8c52ff] bg-[#8c52ff]/5"
+                          : "text-neutral-700 hover:text-[#8c52ff] hover:bg-[#8c52ff]/5"
                           }`}
                       >
                         <motion.span
@@ -304,8 +304,8 @@ export default function Header() {
                         }
                         aria-expanded={activeDropdown === item.name}
                         className={`pr-3 pl-2 py-2.5 rounded-r-lg border-l border-neutral-200 ${activeDropdown === item.name
-                            ? "text-[#8c52ff] bg-[#8c52ff]/10"
-                            : "hover:bg-neutral-50"
+                          ? "text-[#8c52ff] bg-[#8c52ff]/10"
+                          : "hover:bg-neutral-50"
                           }`}
                       >
                         <motion.div
@@ -351,8 +351,8 @@ export default function Header() {
                   <Link
                     to={item.path}
                     className={`px-4 py-2.5 rounded-lg font-medium transition-all duration-200 ${isActive(item.path)
-                        ? "text-[#8c52ff] bg-[#8c52ff]/5"
-                        : "text-neutral-700 hover:text-[#8c52ff] hover:bg-[#8c52ff]/5"
+                      ? "text-[#8c52ff] bg-[#8c52ff]/5"
+                      : "text-neutral-700 hover:text-[#8c52ff] hover:bg-[#8c52ff]/5"
                       }`}
                   >
                     <motion.span

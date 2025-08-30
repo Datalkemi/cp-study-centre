@@ -151,7 +151,7 @@ const About = () => {
     >
       {/* Hero */}
       {/* <section className="bg-gradient-to-r from-purple-600 to-orange-500 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -165,7 +165,7 @@ const About = () => {
               Learn more about our mission, vision, and dedicated team
             </p>
           </motion.div>
-        </div>
+        </div> }
       </section> */}
 
       <motion.div variants={itemTransition} initial="hidden" animate="visible" className="text-center mt-16 mb-14">

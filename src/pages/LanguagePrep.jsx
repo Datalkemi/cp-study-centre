@@ -15,6 +15,9 @@ import {
 } from "lucide-react";
 import EnquiryModal from "../components/EnquiryModal";
 
+
+import { motion } from "framer-motion";
+
 /* ---------- Data ---------- */
 const courses = [
   {
@@ -198,17 +201,39 @@ export default function LanguagePrep() {
 
   const activeCourse = courses.find((c) => c.id === activeId) || courses[0];
 
+  const fadeUp = {
+    hidden: { opacity: 0, y: 18 },
+    visible: (i = 0) => ({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1], delay: i * 0.06 },
+    }),
+  };
+
   return (
     <div className="min-h-screen pt-16">
       {/* Hero */}
-      <section className="bg-gradient-to-r from-purple-600 to-orange-500 py-14 md:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center text-white">
-          <h1 className="mb-4 text-4xl font-bold md:text-5xl">Language Test Preparation</h1>
-          <p className="mx-auto max-w-3xl text-lg text-white/90 md:text-2xl">
-            Master IELTS, PTE, OET, and German with our expert coaching programs
-          </p>
-        </div>
-      </section>
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        animate="visible"
+        className="text-center mt-16 mb-10"
+      >
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold inline-block relative text-neutral-900">
+          Language Test Preparation
+          <motion.span
+            className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-violet-600 to-orange-500"
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: "100%", opacity: 1 }}
+            transition={{ delay: 0.25, duration: 0.55 }}
+          />
+        </h1>
+        <p className="text-lg text-neutral-600 max-w-3xl mx-auto mt-4">
+          Master IELTS, PTE, OET, and German with our expert coaching programs
+
+        </p>
+      </motion.div>
+
 
       {/* Tabs header */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-8">
