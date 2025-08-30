@@ -132,6 +132,16 @@ const About = () => {
     el.scrollBy({ left: dir * step, behavior: "smooth" });
   };
 
+  // Animation variants
+  const itemTransition = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -140,7 +150,7 @@ const About = () => {
       className="min-h-screen pt-16"
     >
       {/* Hero */}
-      <section className="bg-gradient-to-r from-purple-600 to-orange-500 py-20">
+      {/* <section className="bg-gradient-to-r from-purple-600 to-orange-500 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -156,7 +166,23 @@ const About = () => {
             </p>
           </motion.div>
         </div>
-      </section>
+      </section> */}
+
+      <motion.div variants={itemTransition} initial="hidden" animate="visible" className="text-center mt-16 mb-14">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 relative inline-block">
+          About CP Study Center
+          <motion.span
+            className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-[#8c52ff] to-[#ff6b00]"
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: '100%', opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          />
+        </h1>
+        <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+          Learn more about our mission, vision, and dedicated team
+        </p>
+      </motion.div>
+
 
       {/* Mission, Vision, Values */}
       <section className="py-16 bg-white">

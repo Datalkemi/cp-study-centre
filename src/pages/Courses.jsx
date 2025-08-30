@@ -315,7 +315,7 @@ const Courses = () => {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="py-16 px-6 md:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Page Header */}
-        <motion.div variants={itemTransition} initial="hidden" animate="visible" className="text-center mb-14">
+        <motion.div variants={itemTransition} initial="hidden" animate="visible" className="text-center mt-16 mb-14">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 relative inline-block">
             Our Educational Programs
             <motion.span
